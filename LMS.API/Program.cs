@@ -15,7 +15,10 @@ namespace LMS.API
     //        builder.Services.AddDbContext<ApplicationDbContext>(options =>
 				//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-			builder.Services.AddControllers();
+			builder.Services.AddControllers(configure =>
+				configure.ReturnHttpNotAcceptable = true
+			)
+				.AddApplicationPart(typeof(CoursesController).Assembly);
 
 			builder.Services.AddEndpointsApiExplorer();
 			builder.Services.AddSwaggerGen();
