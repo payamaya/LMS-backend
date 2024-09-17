@@ -7,10 +7,13 @@ namespace LMS.API
 		{
 			var builder = WebApplication.CreateBuilder(args);
 
-			// Add services to the container.
+            // Add services to the container.
+            builder.Services.AddPersistenceServices(builder.Configuration);
 
-			builder.Services.AddDbContext<ApplicationDbContext>(options =>
-				options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+            // Add services to the container.
+
+    //        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+				//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 			builder.Services.AddControllers();
 
