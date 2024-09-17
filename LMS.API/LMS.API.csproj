@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\LMS.Models\LMS.Models.csproj" />
     <ProjectReference Include="..\LMS.Persistance\LMS.Persistance.csproj" />
+    <ProjectReference Include="..\LMS.Presentation\LMS.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

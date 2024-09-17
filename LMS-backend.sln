@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMS.Models", "LMS.Models\LM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMS.Persistance", "LMS.Persistance\LMS.Persistance.csproj", "{E3733809-A033-46B2-B447-4EBB99B4CD9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMS.Presentation", "LMS.Presentation\LMS.Presentation.csproj", "{0B748389-538F-42BE-9AB8-2A1AFC68AFA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,6 +37,10 @@ Global
 		{E3733809-A033-46B2-B447-4EBB99B4CD9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3733809-A033-46B2-B447-4EBB99B4CD9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3733809-A033-46B2-B447-4EBB99B4CD9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0B748389-538F-42BE-9AB8-2A1AFC68AFA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0B748389-538F-42BE-9AB8-2A1AFC68AFA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0B748389-538F-42BE-9AB8-2A1AFC68AFA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0B748389-538F-42BE-9AB8-2A1AFC68AFA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{0B5FA1A9-0DC4-4781-8AFC-71C85EAAEEB7} = {662FAAD7-597B-4983-9DE7-54EBBA2F96CE}
 		{F306C6B1-4955-4CFD-B69B-F008DF9F14B2} = {CB6B4E2F-62DE-44CC-B482-6A9589389C6E}
 		{E3733809-A033-46B2-B447-4EBB99B4CD9D} = {0B5FA1A9-0DC4-4781-8AFC-71C85EAAEEB7}
+		{0B748389-538F-42BE-9AB8-2A1AFC68AFA5} = {884B1416-7FC0-487E-8D7E-B7869F1B04C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E543C500-07AD-4E37-B262-060E683BE632}
