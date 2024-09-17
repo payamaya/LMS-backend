@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.8" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.8">
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -26,6 +27,7 @@
     <ProjectReference Include="..\LMS.Models\LMS.Models.csproj" />
     <ProjectReference Include="..\LMS.Persistance\LMS.Persistance.csproj" />
     <ProjectReference Include="..\LMS.Presentation\LMS.Presentation.csproj" />
+    <ProjectReference Include="..\LMS.Service\LMS.Service.csproj" />
   </ItemGroup>
 
 </Project>
