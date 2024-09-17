@@ -3,7 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.10.35027.167
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LMS.API", "LMS.API\LMS.API.csproj", "{35E86476-9641-4DB7-8466-24082B343C2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LMS.API", "LMS.API\LMS.API.csproj", "{35E86476-9641-4DB7-8466-24082B343C2A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{662FAAD7-597B-4983-9DE7-54EBBA2F96CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "API", "API", "{884B1416-7FC0-487E-8D7E-B7869F1B04C0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -18,6 +22,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{35E86476-9641-4DB7-8466-24082B343C2A} = {884B1416-7FC0-487E-8D7E-B7869F1B04C0}
+		{884B1416-7FC0-487E-8D7E-B7869F1B04C0} = {662FAAD7-597B-4983-9DE7-54EBBA2F96CE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E543C500-07AD-4E37-B262-060E683BE632}
