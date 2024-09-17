@@ -6,6 +6,8 @@
 
 //using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.Mvc;
+using LMS.Models.Entities;
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
