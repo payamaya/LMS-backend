@@ -1,3 +1,4 @@
-﻿namespace LMS.API.Models.Dtos;
+﻿namespace LMS.Models.Dtos;
+
 public record TokenDto(string AccessToken, string RefreshToken);
 

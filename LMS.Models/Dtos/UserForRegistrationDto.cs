@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace LMS.API.Models.Dtos;
+namespace LMS.Models.Dtos;
 
 public record UserForRegistrationDto
 {
