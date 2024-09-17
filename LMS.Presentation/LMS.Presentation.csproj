@@ -14,4 +14,8 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\LMS.Persistance\LMS.Persistance.csproj" />
+  </ItemGroup>
+
 </Project>
