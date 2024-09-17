@@ -18,11 +18,11 @@ using System.Text;
 namespace LMS.Service;
 public class AuthService : IAuthService
 {
-    private readonly UserManager<ApplicationUser> userManager;
+    private readonly UserManager<User> userManager;
     private readonly IConfiguration configuration;
-    private ApplicationUser? user;
+    private User? user;
 
-    public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
+    public AuthService(UserManager<User> userManager, RoleManager<IdentityRole> roleManager, IConfiguration configuration)
     {
         this.userManager = userManager;
         this.configuration = configuration;
@@ -99,7 +99,7 @@ public class AuthService : IAuthService
     {
         ArgumentNullException.ThrowIfNull(userForRegistration, nameof(userForRegistration));
 
-        var user = new ApplicationUser
+        var user = new User
         {
             UserName = userForRegistration.UserName,
             Email = userForRegistration.Email,
@@ -123,7 +123,7 @@ public class AuthService : IAuthService
     {
         ClaimsPrincipal principal = GetPrincipalFromExpiredToken(token.AccessToken);
 
-        ApplicationUser? user = await userManager.FindByNameAsync(principal.Identity?.Name!);
+        User? user = await userManager.FindByNameAsync(principal.Identity?.Name!);
         if (user == null || user.RefreshToken != token.RefreshToken || user.RefreshTokenExpireTime <= DateTime.Now)
 
             //ToDo: Handle with middleware and custom exception class
