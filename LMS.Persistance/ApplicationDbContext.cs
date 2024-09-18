@@ -14,17 +14,17 @@ namespace LMS.Persistance
 
 
     //public class ApplicationDbContext : IdentityDbContext<ApplicationUser, IdentityRole<string>, string>
-    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole<string>, string>
+    public class ApplicationDbContext : IdentityDbContext<User, IdentityRole, string>
     {
-		public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
-		{
-		}
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+        {
+        }
 
-		//public DbSet<User> Users => Set<User>();
-		public DbSet<Course> Courses => Set<Course>();
-		public DbSet<Module> Modules => Set<Module>();
-		public DbSet<Activity> Activitys => Set<Activity>();
-		public DbSet<ActivityType> ActivityTypes => Set<ActivityType>();
-		//public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
+        //public DbSet<User> Users => Set<User>();
+        public DbSet<Course> Courses => Set<Course>();
+        public DbSet<Module> Modules => Set<Module>();
+        public DbSet<Activity> Activitys => Set<Activity>();
+        public DbSet<ActivityType> ActivityTypes => Set<ActivityType>();
+        //public DbSet<ApplicationUser> ApplicationUsers => Set<ApplicationUser>();
     }
 }
