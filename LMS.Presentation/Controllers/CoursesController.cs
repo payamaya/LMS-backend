@@ -6,9 +6,11 @@
 
 //using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.Mvc;
+//using LMS.API;
 using LMS.Models.Entities;
 using LMS.Persistance;
 
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -27,13 +29,21 @@ namespace LMS.Presentation.Controllers
 
         // GET: api/Courses
         [HttpGet]
+        [Authorize]
+        [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
             return await _context.Courses.ToListAsync();
         }
 
         // GET: api/Courses/5
+        /// <summary>
+        /// Hur gör man det här, 3 * /
+        /// </summary>
+        /// <param name="id">Hej hej</param>
+        /// <returns></returns>
         [HttpGet("{id}")]
+        [Produces("application/json")]
         public async Task<ActionResult<Course>> GetCourse(int id)
         {
             var course = await _context.Courses.FindAsync(id);

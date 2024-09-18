@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
+//using System.Web.Http;
+
 namespace LMS.Presentation.Controllers;
 
 
@@ -20,6 +22,11 @@ public class AutenticationController : ControllerBase
         _serviceManager = serviceManager;
     }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="userForRegistration"></param>
+    /// <returns></returns>
     [HttpPost]
     public async Task<IActionResult> RegisterUser(UserForRegistrationDto userForRegistration)
     {
