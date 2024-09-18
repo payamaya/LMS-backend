@@ -1,46 +1,64 @@
 
-namespace LMS.API
+using LMS.API.Extensions;
+using LMS.Presentation;
+
+
+namespace LMS.API;
+
+public class Program
 {
-	public class Program
+	public static void Main(string[] args)
 	{
-		public static void Main(string[] args)
+		var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+        builder.Services.AddPersistenceServices(builder.Configuration);
+		builder.Services.AddPresentationServices(builder.Configuration);
+
+		builder.Services.ConfigureServices();
+		builder.Services.ConfigureIdentity();
+
+        // Add services to the container.
+		builder.Services.ConfigureCors();
+		//builder.Services.ConfigureOpenApi();
+		builder.Services.ConfigureJwt(builder.Configuration);
+
+		//        builder.Services.AddDbContext<ApplicationDbContext>(options =>
+		//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+		//builder.Services.AddControllers(configure =>
+		//	configure.ReturnHttpNotAcceptable = true
+		//)
+		////.AddApplicationPart(typeof(CoursesController).Assembly)
+		//.AddJsonOptions(opts =>
+		//{
+		//	var enumConverter = new JsonStringEnumConverter();
+		//	opts.JsonSerializerOptions.Converters.Add(enumConverter);
+		//	opts.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault | JsonIgnoreCondition.WhenWritingNull;
+		//})
+		//.AddNewtonsoftJson(option => option.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
+
+		builder.Services.AddEndpointsApiExplorer();
+		builder.Services.AddSwaggerGen();
+
+		var app = builder.Build();
+
+		// Configure the HTTP request pipeline.
+		if (app.Environment.IsDevelopment())
 		{
-			var builder = WebApplication.CreateBuilder(args);
-
-            // Add services to the container.
-            builder.Services.AddPersistenceServices(builder.Configuration);
-
-            // Add services to the container.
-
-    //        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-				//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-			builder.Services.AddControllers(configure =>
-				configure.ReturnHttpNotAcceptable = true
-			)
-				.AddApplicationPart(typeof(CoursesController).Assembly);
-
-			builder.Services.AddEndpointsApiExplorer();
-			builder.Services.AddSwaggerGen();
-
-
-			var app = builder.Build();
-
-			// Configure the HTTP request pipeline.
-			if (app.Environment.IsDevelopment())
-			{
-				app.UseSwagger();
-				app.UseSwaggerUI();
-			}
-
-			app.UseHttpsRedirection();
-
-			app.UseAuthorization();
-
-
-			app.MapControllers();
-
-			app.Run();
+			app.UseSwagger();
+			app.UseSwaggerUI();
 		}
+
+        app.UseHttpsRedirection();
+
+        app.UseCors("AllowAll");
+
+        app.UseAuthentication();
+        app.UseAuthorization();
+
+        app.MapControllers();
+
+		app.Run();
 	}
 }
