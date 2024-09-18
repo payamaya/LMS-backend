@@ -28,6 +28,7 @@
     <ProjectReference Include="..\LMS.Models\LMS.Models.csproj" />
     <ProjectReference Include="..\LMS.Persistance\LMS.Persistance.csproj" />
     <ProjectReference Include="..\LMS.Presentation\LMS.Presentation.csproj" />
+    <ProjectReference Include="..\LMS.Repository\LMS.Repository.csproj" />
     <ProjectReference Include="..\LMS.Service\LMS.Service.csproj" />
   </ItemGroup>
 

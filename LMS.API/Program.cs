@@ -1,7 +1,7 @@
 
 using LMS.API.Extensions;
 using LMS.Presentation;
-
+using LMS.Repository;
 
 namespace LMS.API;
 
@@ -14,8 +14,10 @@ public class Program
         // Add services to the container.
         builder.Services.AddPersistenceServices(builder.Configuration);
 		builder.Services.AddPresentationServices(builder.Configuration);
+        builder.Services.AddRepositoryServices(builder.Configuration);
 
-		builder.Services.ConfigureServices();
+
+        builder.Services.ConfigureServices();
 		builder.Services.ConfigureIdentity();
 
         // Add services to the container.

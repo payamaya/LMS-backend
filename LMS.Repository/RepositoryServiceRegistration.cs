@@ -6,7 +6,7 @@ namespace LMS.Repository
 {
     public static class RepositoryServiceRegistration
     {
-        public static IServiceCollection AddPresentationServices(
+        public static IServiceCollection AddRepositoryServices(
             this IServiceCollection services,
             IConfiguration configuration)
         {
