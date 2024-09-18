@@ -6,4 +6,13 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Extensions\NewFile1.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\LMS.Contracts\LMS.Contracts.csproj" />
+    <ProjectReference Include="..\LMS.Persistance\LMS.Persistance.csproj" />
+  </ItemGroup>
+
 </Project>
