@@ -7,11 +7,12 @@
 //using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.Mvc;
 using LMS.Models.Entities;
+using LMS.Persistance;
 
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-namespace LMS.API
+namespace LMS.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]

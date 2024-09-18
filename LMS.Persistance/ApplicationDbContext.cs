@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
-namespace LMS.API
+namespace LMS.Persistance
 {
     //public class MovieCardsAPIContext : IdentityDbContext<ApplicationUser, IdentityRole<long>, long>
     //{
