@@ -1,11 +1,7 @@
 ﻿using LMS.Contracts;
 using LMS.Models.Entities;
 using LMS.Persistance;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Repository
 {
@@ -17,14 +13,14 @@ namespace LMS.Repository
         {
         }
 
-        public Task<Course?> GetCourseAsync(Guid id, bool trackChanges)
+        public async Task<Course?> GetCourseAsync(Guid id, bool trackChanges)
         {
-            throw new NotImplementedException();
+            return await FindByCondition(a => a.Id.Equals(id), trackChanges).FirstOrDefaultAsync();
         }
 
-        public Task<IEnumerable<Course>> GetCoursesAsync(Guid id, bool trackChanges)
+        public async Task<IEnumerable<Course>> GetCoursesAsync(Guid id, bool trackChanges)
         {
-            throw new NotImplementedException();
+            return await FindAll(trackChanges).ToListAsync();
         }
     }
 }
