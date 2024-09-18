@@ -1,11 +1,14 @@
 ﻿//using LMS.API.Service.Contracts;
 //using LMS.API.Services;
 
+using LMS.Models.Entities;
 using LMS.Service;
 using LMS.Service.Contracts;
 
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+
 
 //using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
@@ -96,5 +99,22 @@ public static class ServiceExtensions
         });
     }
 
+    public static void ConfigureIdentity(this IServiceCollection services)
+    {
+        // Lägg till dataskyddstjänsterna för att möjliggöra tokenprovider
+        services.AddDataProtection();
 
+        services.AddIdentityCore<User>(opt =>
+        {
+            // Set change password, rules for password
+            opt.Password.RequireDigit = false;
+            opt.Password.RequireLowercase = false;
+            opt.Password.RequireUppercase = false;
+            opt.Password.RequireNonAlphanumeric = false;
+            opt.Password.RequiredLength = 3;
+        })
+            .AddRoles<IdentityRole>()
+            .AddEntityFrameworkStores<ApplicationDbContext>()
+            .AddDefaultTokenProviders();
+    }
 }
