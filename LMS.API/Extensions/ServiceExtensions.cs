@@ -63,11 +63,13 @@ public static class ServiceExtensions
     public static void ConfigureServices(this IServiceCollection services)
     {
         services.AddScoped<IServiceManager, ServiceManager>();
+
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped(provider => new Lazy<IAuthService>(() => provider.GetRequiredService<IAuthService>())); 
 
         services.AddScoped<ICourseService, CourseService>();
+        services.AddScoped(provider => new Lazy<ICourseService>(() => provider.GetRequiredService<ICourseService>()));
 
-        services.AddScoped(provider => new Lazy<IAuthService>(() => provider.GetRequiredService<IAuthService>()));
     }
 
     public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
