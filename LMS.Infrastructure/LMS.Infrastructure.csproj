@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\LMS.Infrastructure\LMS.Infrastructure.csproj" />
     <ProjectReference Include="..\LMS.Models\LMS.Models.csproj" />
   </ItemGroup>
 

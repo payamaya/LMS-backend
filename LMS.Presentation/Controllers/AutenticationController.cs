@@ -1,5 +1,5 @@
 ﻿//using LMS.API.Service.Contracts;
-using LMS.Models.Dtos;
+using LMS.Infrastructure.Dtos;
 using LMS.Service.Contracts;
 
 using Microsoft.AspNetCore.Authorization;

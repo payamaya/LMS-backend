@@ -1,4 +1,4 @@
-﻿using LMS.Models.Dtos;
+﻿using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 using LMS.Service.Contracts;
 

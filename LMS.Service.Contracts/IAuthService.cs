@@ -1,4 +1,4 @@
-﻿using LMS.Models.Dtos;
+﻿using LMS.Infrastructure.Dtos;
 
 using Microsoft.AspNetCore.Identity;
 
