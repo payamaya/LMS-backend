@@ -24,4 +24,8 @@
     <ProjectReference Include="..\LMS.Models\LMS.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
