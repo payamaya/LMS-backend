@@ -4,8 +4,6 @@
 using LMS.Models.Entities;
 using LMS.Service;
 using LMS.Service.Contracts;
-
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 
@@ -66,6 +64,9 @@ public static class ServiceExtensions
     {
         services.AddScoped<IServiceManager, ServiceManager>();
         services.AddScoped<IAuthService, AuthService>();
+
+        services.AddScoped<ICourseService, CourseService>();
+
         services.AddScoped(provider => new Lazy<IAuthService>(() => provider.GetRequiredService<IAuthService>()));
     }
 
