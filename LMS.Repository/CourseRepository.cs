@@ -18,7 +18,7 @@ namespace LMS.Repository
             return await FindByCondition(a => a.Id.Equals(id), trackChanges).FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<Course>> GetCoursesAsync(Guid id, bool trackChanges)
+        public async Task<IEnumerable<Course>> GetCoursesAsync(bool trackChanges)
         {
             return await FindAll(trackChanges).ToListAsync();
         }
