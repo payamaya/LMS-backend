@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LMS.Contracts\LMS.Contracts.csproj" />
     <ProjectReference Include="..\LMS.Service.Contracts\LMS.Service.Contracts.csproj" />
   </ItemGroup>
 
