@@ -1,10 +1,5 @@
 ﻿using LMS.Contracts;
 using LMS.Persistance;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LMS.Repository
 {
@@ -15,7 +10,8 @@ namespace LMS.Repository
         //private readonly Lazy<IActorRepository> _actorRepository;
 
         public ICourseRepository Course => _courseRepository.Value;
-       // public IActorRepository Actor => _actorRepository.Value;
+        // public IActorRepository Actor => _actorRepository.Value;
+
 
         public UnitOfWork(ApplicationDbContext context, Lazy<ICourseRepository> courseRepository)
         {
