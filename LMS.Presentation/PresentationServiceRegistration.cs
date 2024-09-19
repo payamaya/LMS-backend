@@ -2,11 +2,8 @@
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json;
 using System.Text.Json.Serialization;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
-using LMS.Presentation.Controllers;
 
 namespace LMS.Presentation
 {

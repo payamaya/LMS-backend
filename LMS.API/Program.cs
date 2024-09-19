@@ -1,5 +1,6 @@
 
 using LMS.API.Extensions;
+using LMS.Infrastructure;
 using LMS.Presentation;
 using LMS.Repository;
 
@@ -15,6 +16,7 @@ public class Program
         builder.Services.AddPersistenceServices(builder.Configuration);
 		builder.Services.AddPresentationServices(builder.Configuration);
         builder.Services.AddRepositoryServices(builder.Configuration);
+        builder.Services.AddInfrastructureServices();
 
 
         builder.Services.ConfigureServices();
