@@ -9,7 +9,7 @@
 //using LMS.API;
 using LMS.Models.Entities;
 using LMS.Persistance;
-
+using LMS.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -21,19 +21,26 @@ namespace LMS.Presentation.Controllers
     public class CoursesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IServiceManager _sm;
 
-        public CoursesController(ApplicationDbContext context)
+        public CoursesController(ApplicationDbContext context, IServiceManager sm)
         {
             _context = context;
+            _sm = sm;
         }
 
         // GET: api/Courses
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         [Authorize]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
         {
-            return await _context.Courses.ToListAsync();
+           return Ok(await _sm.CourseService.GetCoursesAsync());
+            /*return await _context.Courses.ToListAsync();*/
         }
 
         // GET: api/Courses/5
@@ -42,23 +49,23 @@ namespace LMS.Presentation.Controllers
         /// </summary>
         /// <param name="id">Hej hej</param>
         /// <returns></returns>
-        [HttpGet("{id}")]
+        [HttpGet("{id:guid}")]
         [Produces("application/json")]
-        public async Task<ActionResult<Course>> GetCourse(int id)
+        public async Task<ActionResult<Course>> GetCourse(Guid id)
         {
-            var course = await _context.Courses.FindAsync(id);
+            var course = await _sm.CourseService.GetCourseAsync(id);
 
             if (course == null)
             {
                 return NotFound();
             }
 
-            return course;
+            return Ok(course);
         }
 
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        [HttpPut("{id}")]
+   /*     [HttpPut("{id}")]
         public async Task<IActionResult> PutCourse(int id, Course course)
         {
             if (id != course.Id)
@@ -85,7 +92,7 @@ namespace LMS.Presentation.Controllers
             }
 
             return NoContent();
-        }
+        }*/
 
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -114,9 +121,9 @@ namespace LMS.Presentation.Controllers
             return NoContent();
         }
 
-        private bool CourseExists(int id)
+        /*private bool CourseExists(int id)
         {
             return _context.Courses.Any(e => e.Id == id);
-        }
+        }*/
     }
 }
