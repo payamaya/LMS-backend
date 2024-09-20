@@ -9,6 +9,11 @@ namespace LMS.Infrastructure.Profiles
         public CourseMapperProfile()
         {
             CreateMap<Course, CourseDto>();
+            CreateMap<User, UserDto>();
+            CreateMap<Module, ModuleDto>();
+            CreateMap<Activity, ActivityDto>();
+            CreateMap<ActivityType, ActivityTypeDto>();
+            
         }
     }
 }
