@@ -8,7 +8,7 @@ namespace LMS.Infrastructure.Profiles
     {
         public CourseMapperProfile()
         {
-            CreateMap<Course, CourseDTO>();
+            CreateMap<Course, CourseDto>();
         }
     }
 }

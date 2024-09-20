@@ -1,16 +1,14 @@
 ﻿namespace LMS.Infrastructure.Dtos
 {
-    public record CourseDTO
+    public record CourseDto
     {
-        public Guid Id { get; set; }
-        public string Name { get; set; }
-        public string Description { get; set; }
-        public DateTime CreatedDate { get; set; }
-        /*   public DateTime UpdatedDate { get; set; }
-           public DateTime LastModifiedDate { get; set; }
-           public DateTime LastModifiedBy { get; set; }
-           public DateTime LastModifiedOn { get; set; }
-           public DateTime LastModifiedUntil { get; set; }*/
+        public Guid Id { get; init; }
+        public string CourseName { get; init; }
+        public string Description { get; init; }
+        public DateTime StartDate { get; init; }
+
+        public ICollection<UserDto>? Users { get; init; }
+        public ICollection<ModuleDto>? Modules { get; init; }
 
     }
 }
