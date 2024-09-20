@@ -10,10 +10,37 @@ namespace LMS.Repository.Extensions
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddScoped<ICourseRepository, CourseRepository>();
-
             services.AddScoped(
                 provider => new Lazy<ICourseRepository>(
                     () => provider.GetRequiredService<ICourseRepository>()
+                )
+            );
+
+            services.AddScoped<IActivityRepository, ActivityRepository>();
+            services.AddScoped(
+                provider => new Lazy<IActivityRepository>(
+                    () => provider.GetRequiredService<IActivityRepository>()
+                )
+            );
+
+            services.AddScoped<IActivityTypeRepository, ActivityTypeRepository>();
+            services.AddScoped(
+                provider => new Lazy<IActivityTypeRepository>(
+                    () => provider.GetRequiredService<IActivityTypeRepository>()
+                )
+            );
+
+            services.AddScoped<IModuleRepository, ModuleRepository>();
+            services.AddScoped(
+                provider => new Lazy<IModuleRepository>(
+                    () => provider.GetRequiredService<IModuleRepository>()
+                )
+            );
+
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped(
+                provider => new Lazy<IUserRepository>(
+                    () => provider.GetRequiredService<IUserRepository>()
                 )
             );
             /*
