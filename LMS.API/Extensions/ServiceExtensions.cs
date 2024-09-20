@@ -70,6 +70,8 @@ public static class ServiceExtensions
         services.AddScoped<ICourseService, CourseService>();
         services.AddScoped(provider => new Lazy<ICourseService>(() => provider.GetRequiredService<ICourseService>()));
 
+        services.AddScoped<IActivityTypeService, ActivityTypeService>();
+        services.AddScoped(provider => new Lazy<IActivityTypeService>(() => provider.GetRequiredService<IActivityTypeService>()));
     }
 
     public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
