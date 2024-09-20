@@ -1,10 +1,11 @@
-﻿using LMS.Models.Entities;
+﻿using LMS.Infrastructure.Dtos;
+using LMS.Models.Entities;
 
 namespace LMS.Service.Contracts
 {
     public interface ICourseService
     {
-        Task<Course?> GetCourseAsync(Guid courseId, bool trackChanges = false); 
-        Task<IEnumerable<Course>> GetCoursesAsync(bool trackChanges = false);
+        Task<CourseDto?> GetCourseAsync(Guid courseId, bool trackChanges = false); 
+        Task<IEnumerable<CourseDto>> GetCoursesAsync(bool trackChanges = false);
     }
 }

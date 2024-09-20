@@ -1,4 +1,6 @@
-﻿using LMS.Contracts;
+﻿using AutoMapper;
+using LMS.Contracts;
+using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 using LMS.Service.Contracts;
 
@@ -9,35 +11,31 @@ namespace LMS.Service
     {
 
         private readonly IUnitOfWork _uow;
-        //private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
-        public CourseService(IUnitOfWork uow)
+        public CourseService(IUnitOfWork uow, IMapper mapper)
         {
             _uow = uow;
-            //_mapper = mapper;
+            _mapper = mapper;
         }
 
-        public async Task<Course?> GetCourseAsync(Guid courseId, bool trackChanges = false)
+        public async Task<CourseDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
         {
+
             var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
+            if (course is null) return null; //ToDo: Fix later
 
-            if (course is null) return null!; //ToDo: Fix later
-
-            //_mapper.Map<IEnumerable<CourseDTO>>(courses);
-            return course; 
+            return _mapper.Map<CourseDto>(course);
         }
 
-        public async Task<IEnumerable<Course>> GetCoursesAsync( bool trackChanges = false)
+        public async Task<IEnumerable<CourseDto>> GetCoursesAsync(bool trackChanges = false)
         {
             var courses = await _uow.Course.GetCoursesAsync(trackChanges);
-
             if (courses is null) return null!; //ToDo: Fix later
 
-            return courses; 
-            
-            //_mapper.Map<IEnumerable<CourseDTO>>(courses);
-        }  
-        
-        
+            return _mapper.Map<IEnumerable<CourseDto>>(courses);
+
+        }
+
     }
 }

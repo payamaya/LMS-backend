@@ -7,6 +7,7 @@
 //using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.Mvc;
 //using LMS.API;
+using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 using LMS.Persistance;
 using LMS.Service.Contracts;
@@ -37,7 +38,7 @@ namespace LMS.Presentation.Controllers
         [HttpGet]
         [Authorize]
         [Produces("application/json")]
-        public async Task<ActionResult<IEnumerable<Course>>> GetCourses()
+        public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
            return Ok(await _sm.CourseService.GetCoursesAsync());
             /*return await _context.Courses.ToListAsync();*/
@@ -51,7 +52,7 @@ namespace LMS.Presentation.Controllers
         /// <returns></returns>
         [HttpGet("{id:guid}")]
         [Produces("application/json")]
-        public async Task<ActionResult<Course>> GetCourse(Guid id)
+        public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
         {
             var course = await _sm.CourseService.GetCourseAsync(id);
 
