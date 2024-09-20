@@ -3,12 +3,14 @@ using LMS.API.Extensions;
 using LMS.Infrastructure;
 using LMS.Presentation;
 using LMS.Repository;
+using LMS.Persistance.Extensions;
 
 namespace LMS.API;
 
+
 public class Program
 {
-	public static void Main(string[] args)
+	public static async Task Main(string[] args)
 	{
 		var builder = WebApplication.CreateBuilder(args);
 
@@ -52,7 +54,8 @@ public class Program
 		{
 			app.UseSwagger();
 			app.UseSwaggerUI();
-		}
+            await app.SeedDataAsync();
+        }
 
         app.UseHttpsRedirection();
 
