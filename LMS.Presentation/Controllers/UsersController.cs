@@ -36,11 +36,11 @@ namespace LMS.Presentation.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<UserDto>>> GetUsers()
         {
-            return Ok(await _sm.CourseService.GetCoursesAsync());
+            return Ok(await _sm.UserService.GetUsersAsync());
             /*return await _context.Courses.ToListAsync();*/
         }
 
@@ -54,7 +54,7 @@ namespace LMS.Presentation.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<UserDto>> GetUser(Guid id)
         {
-            var user = await _sm.CourseService.GetCourseAsync(id);
+            var user = await _sm.UserService.GetUserAsync(id);
 
             if (user == null)
             {
