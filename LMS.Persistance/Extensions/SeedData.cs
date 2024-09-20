@@ -32,7 +32,16 @@ namespace LMS.Persistance.Extensions
                 {
                     await CreateRolesAsync(new[] { adminRole, actorRole });
 
-                    //// Seed ContactInformation
+                    //// Seed ActivityType
+
+                    if (!db.ActivityTypes.Any())
+                    {
+                        var activityType = GenerateActivityType();
+                        await db.ActivityTypes.AddRangeAsync(activityType);
+                        await db.SaveChangesAsync();
+                    }
+
+                    /// //// Seed ContactInformation
                     //var contactInformation = GenerateContactInformation(5).ToList();
                     //await db.ContactInformations.AddRangeAsync(contactInformation);
                     //await db.SaveChangesAsync();
@@ -73,6 +82,26 @@ namespace LMS.Persistance.Extensions
                     throw;
                 }
             }
+        }
+
+        private static List<ActivityType> GenerateActivityType()
+        {
+            return new List<ActivityType>()
+           {
+               new ActivityType
+               {
+                   ActivityTypeName = "e-learning"
+               },
+               new ActivityType
+               {
+                   ActivityTypeName = "Pluralsight"
+               },
+               new ActivityType
+               {
+                   ActivityTypeName = "Learning"
+               }
+           };
+
         }
 
         private static async Task CreateRolesAsync(string[] roleNames)
