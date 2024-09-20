@@ -2,10 +2,11 @@
 {
     public interface IUnitOfWork
     {
-     /*   IMovieRepository Movie { get; }
-        IActorRepository Actor { get; }*/
-
         ICourseRepository Course { get; }
+        IModuleRepository Module { get; }
+        IActivityRepository Activity { get; }
+        IActivityTypeRepository ActivityType { get; }
+        IUserRepository User { get; }
         Task CompleteAsync();
     }
 }
