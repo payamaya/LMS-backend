@@ -36,11 +36,11 @@ namespace LMS.Presentation.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<ModuleDto>>> GetModules()
         {
-            return Ok(await _sm.CourseService.GetCoursesAsync());
+            return Ok(await _sm.ModuleService.GetModulesAsync());
             /*return await _context.Courses.ToListAsync();*/
         }
 
@@ -54,7 +54,7 @@ namespace LMS.Presentation.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<ModuleDto>> GetModule(Guid id)
         {
-            var module = await _sm.CourseService.GetCourseAsync(id);
+            var module = await _sm.ModuleService.GetModuleAsync(id);
 
             if (module == null)
             {
