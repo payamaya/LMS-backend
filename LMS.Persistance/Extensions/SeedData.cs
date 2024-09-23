@@ -12,8 +12,8 @@ namespace LMS.Persistance.Extensions
         private static UserManager<User> userManager = null!;
         private static RoleManager<IdentityRole> roleManager = null!;
         private static IConfiguration configuration = null!;
-        private const string actorRole = "Actor";
-        private const string adminRole = "Admin";
+        private const string studentRole = "Student";
+        private const string teacherRole = "Teacher";
 
         public static async Task SeedDataAsync(this IApplicationBuilder builder)
         {
@@ -30,17 +30,32 @@ namespace LMS.Persistance.Extensions
 
                 try
                 {
-                    await CreateRolesAsync(new[] { adminRole, actorRole });
 
                     //// Seed ActivityType
 
-                    if (!db.ActivityTypes.Any())
+                    if (!db.Activitys.Any())
                     {
-                        var activityType = GenerateActivityType();
-                        await db.ActivityTypes.AddRangeAsync(activityType);
+                        var activityTypes = GenerateActivityType();
+                        await db.ActivityTypes.AddRangeAsync(activityTypes);
+                        //await db.SaveChangesAsync();
+
+                        var courses = GenerateCourses();
+                        await db.Courses.AddRangeAsync(courses);
+                        //await db.SaveChangesAsync();
+
+                        var modules = GenerateModules(courses);
+                        await db.Modules.AddRangeAsync(modules);
+                        //await db.SaveChangesAsync();
+
+                        var activities = GenerateActivities(modules, activityTypes);
+                        await db.Activitys.AddRangeAsync(activities);
+
+                        await CreateRolesAsync(new[] { teacherRole, studentRole });
+ 
                         await db.SaveChangesAsync();
                     }
 
+                    //DateTime.Parse("2024-03-24");
                     /// //// Seed ContactInformation
                     //var contactInformation = GenerateContactInformation(5).ToList();
                     //await db.ContactInformations.AddRangeAsync(contactInformation);
@@ -84,6 +99,124 @@ namespace LMS.Persistance.Extensions
             }
         }
 
+        private static List<Activity> GenerateActivities(List<Module> modules, List<ActivityType> activityTypes)
+        {
+            return new List<Activity>
+            {
+                new Activity
+                {
+                    ActivityName = "Lecture 1: Variables and Data Types",
+                    Description = "Introduction to basic data types in Python",
+                    StartTime = DateTime.Parse("2023-01-05"),
+                    EndTime = DateTime.Parse("2023-01-05"),
+                    Module = modules[0],
+                    ActivityType = activityTypes[0]
+                },
+                new Activity
+                {
+                    ActivityName = "Assignment 1: Basic Python Program",
+                    Description = "Create a simple Python program.",
+                    StartTime = DateTime.Parse("2023-01-07"),
+                    EndTime = DateTime.Parse("2023-01-14"),
+                    Module = modules[0],
+                    ActivityType = activityTypes[1]
+                },
+                new Activity
+                {
+                    ActivityName = "Lecture 1: Arrays and Linked Lists",
+                    Description = "Overview of arrays and linked lists.",
+                    StartTime = DateTime.Parse("2023-02-20"),
+                    EndTime = DateTime.Parse("2023-02-20"),
+                    Module = modules[1],
+                    ActivityType = activityTypes[0]
+                },
+                new Activity
+                {
+                    ActivityName = "Assignment 1: Implement a Linked List",
+                    Description = "Implement a simple linked list in Python.",
+                    StartTime = DateTime.Parse("2023-02-22"),
+                    EndTime = DateTime.Parse("2023-03-01"),
+                    Module = modules[1],
+                    ActivityType = activityTypes[2]
+                },
+                new Activity
+                {
+                    ActivityName = "Lecture 2: Variables and Data Types",
+                    Description = "Introduction to basic data types in Python",
+                    StartTime = DateTime.Parse("2023-01-05"),
+                    EndTime = DateTime.Parse("2023-01-05"),
+                    Module = modules[2],
+                    ActivityType = activityTypes[0]
+                },
+                new Activity
+                {
+                    ActivityName = "Assignment 2: Basic Python Program",
+                    Description = "Create a simple Python program.",
+                    StartTime = DateTime.Parse("2023-01-07"),
+                    EndTime = DateTime.Parse("2023-01-14"),
+                    Module = modules[2],
+                    ActivityType = activityTypes[1]
+                },
+                new Activity
+                {
+                    ActivityName = "Lecture 2: Arrays and Linked Lists",
+                    Description = "Overview of arrays and linked lists.",
+                    StartTime = DateTime.Parse("2023-02-20"),
+                    EndTime = DateTime.Parse("2023-02-20"),
+                    Module = modules[3],
+                    ActivityType = activityTypes[0]
+                },
+                new Activity
+                {
+                    ActivityName = "Assignment 2: Implement a Linked List",
+                    Description = "Implement a simple linked list in Python.",
+                    StartTime = DateTime.Parse("2023-02-22"),
+                    EndTime = DateTime.Parse("2023-03-01"),
+                    Module = modules[3],
+                    ActivityType = activityTypes[2]
+                }
+            };
+        }
+
+        private static List<Module> GenerateModules(List<Course> courses)
+        {
+            return new List<Module>
+            {
+                new Module
+                {
+                    ModuleName = "Introduction to Programming",
+                    Description = "Learn the basics of programming using Python.",
+                    StartDate = DateTime.Parse("2023-01-05"),
+                    EndDate = DateTime.Parse("2023-02-15"),
+                    Course = courses[0]
+                },
+                new Module
+                {
+                    ModuleName = "Data Structures",
+                    Description = "An introduction to common data structures.",
+                    StartDate = DateTime.Parse("2023-02-20"),
+                    EndDate = DateTime.Parse("2023-04-10"),
+                    Course = courses[0]
+                },
+                new Module
+                {
+                    ModuleName = "Introduction to Webdevelopment",
+                    Description = "Learn the basics of programming using HTML and CSS.",
+                    StartDate = DateTime.Parse("2023-01-05"),
+                    EndDate = DateTime.Parse("2023-02-15"),
+                    Course = courses[1]
+                },
+                new Module
+                {
+                    ModuleName = "Introduction to JavaScript",
+                    Description = "An introduction to basic JavaScript.",
+                    StartDate = DateTime.Parse("2023-02-20"),
+                    EndDate = DateTime.Parse("2023-04-10"),
+                    Course = courses[1]
+                }
+            };
+        }
+
         private static List<ActivityType> GenerateActivityType()
         {
             return new List<ActivityType>()
@@ -99,6 +232,25 @@ namespace LMS.Persistance.Extensions
                new ActivityType
                {
                    ActivityTypeName = "Learning"
+               }
+           };
+        }
+
+        private static List<Course> GenerateCourses()
+        {
+            return new List<Course>()
+           {
+               new Course
+               {
+                   CourseName = "Computer Science Basics",
+                   Description = "Introduction to computer science principles.",
+                   StartDate = DateTime.Parse("2023-01-01")
+               },
+               new Course
+               {
+                   CourseName = "Web Development",
+                   Description = "Introduction to Web development.",
+                   StartDate = DateTime.Parse("2023-01-01")
                }
            };
 
