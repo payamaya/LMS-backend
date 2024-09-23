@@ -4,6 +4,7 @@ using LMS.Infrastructure;
 using LMS.Presentation;
 using LMS.Repository;
 using LMS.Persistance.Extensions;
+using LMS.API.Middleware;
 
 namespace LMS.API;
 
@@ -48,6 +49,9 @@ public class Program
 		builder.Services.AddSwaggerGen();
 
 		var app = builder.Build();
+
+		app.UseMiddleware<UnauthorizedMiddleware>();
+		app.UseMiddleware<HttpExceptionHandlingMiddleware>();
 
 		// Configure the HTTP request pipeline.
 		if (app.Environment.IsDevelopment())

@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+
+using LMS.Application.Exceptions;
 using LMS.Contracts;
 using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
@@ -23,7 +25,11 @@ namespace LMS.Service
         {
 
             var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
-            if (course is null) return null; //ToDo: Fix later
+            if (course is null)
+            {
+                throw new NotFoundException(nameof(GetCourseAsync), courseId);
+                //return null; //ToDo: Fix later
+            }
 
             return _mapper.Map<CourseDto>(course);
         }
