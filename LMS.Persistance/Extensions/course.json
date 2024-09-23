@@ -1,0 +1,121 @@
+{
+    "userId": 101,
+    "name": "Alice Johnson",
+    "email": "alice.johnson@example.com",
+    "course": {
+        "courseId": 1,
+        "courseName": "Computer Science Basics",
+        "description": "Introduction to computer science principles.",
+        "startDate": "2023-01-01",
+        "users": [
+            {
+                "userId": 101,
+                "name": "Alice Johnson",
+                "email": "alice.johnson@example.com"
+            },
+            {
+                "userId": 102,
+                "name": "Bob Smith",
+                "email": "bob.smith@example.com"
+            }
+        ],
+        "modules": [
+            {
+                "moduleId": 1,
+                "moduleName": "Introduction to Programming",
+                "description": "Learn the basics of programming using Python.",
+                "startDate": "2023-01-05",
+                "endDate": "2023-02-15",
+                "state": "completed",
+                "activities": [
+                    {
+                        "activityId": 1,
+                        "activityName": "Lecture 1: Variables and Data Types",
+                        "description": "Introduction to basic data types in Python.",
+                        "startTime": "2023-01-05T10:00:00",
+                        "endTime": "2023-01-05T11:00:00",
+                        "activityType": {
+                            "activityTypeId": 1,
+                            "activityTypeName": "Lecture"
+                        }
+                    },
+                    {
+                        "activityId": 2,
+                        "activityName": "Assignment 1: Basic Python Program",
+                        "description": "Create a simple Python program.",
+                        "startTime": "2023-01-07T10:00:00",
+                        "endTime": "2023-01-14T10:00:00",
+                        "activityType": {
+                            "activityTypeId": 2,
+                            "activityTypeName": "Assignment"
+                        }
+                    }
+                ]
+            },
+            {
+                "moduleId": 2,
+                "moduleName": "Data Structures",
+                "description": "An introduction to common data structures.",
+                "startDate": "2023-02-20",
+                "endDate": "2023-04-10",
+                "state": "in-progress",
+                "activities": [
+                    {
+                        "activityId": 3,
+                        "activityName": "Lecture 1: Arrays and Linked Lists",
+                        "description": "Overview of arrays and linked lists.",
+                        "startTime": "2023-02-20T10:00:00",
+                        "endTime": "2023-02-20T11:30:00",
+                        "activityType": {
+                            "activityTypeId": 1,
+                            "activityTypeName": "Lecture"
+                        }
+                    },
+                    {
+                        "activityId": 4,
+                        "activityName": "Assignment 1: Implement a Linked List",
+                        "description": "Implement a simple linked list in Python.",
+                        "startTime": "2023-02-22T10:00:00",
+                        "endTime": "2023-03-01T10:00:00",
+                        "activityType": {
+                            "activityTypeId": 2,
+                            "activityTypeName": "Assignment"
+                        }
+                    }
+                ]
+            },
+            {
+                "moduleId": 3,
+                "moduleName": "Algorithms",
+                "description": "A course on fundamental algorithms.",
+                "startDate": "2023-04-20",
+                "endDate": "2023-06-10",
+                "state": "not-started",
+                "activities": [
+                    {
+                        "activityId": 5,
+                        "activityName": "Lecture 1: Sorting Algorithms",
+                        "description": "Introduction to common sorting algorithms.",
+                        "startTime": "2023-04-20T10:00:00",
+                        "endTime": "2023-04-20T11:00:00",
+                        "activityType": {
+                            "activityTypeId": 1,
+                            "activityTypeName": "Lecture"
+                        }
+                    },
+                    {
+                        "activityId": 6,
+                        "activityName": "Assignment 1: Implement Merge Sort",
+                        "description": "Write a program that implements the merge sort algorithm.",
+                        "startTime": "2023-04-22T10:00:00",
+                        "endTime": "2023-04-30T10:00:00",
+                        "activityType": {
+                            "activityTypeId": 2,
+                            "activityTypeName": "Assignment"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+}
