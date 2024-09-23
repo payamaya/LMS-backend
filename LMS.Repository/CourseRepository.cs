@@ -15,7 +15,11 @@ namespace LMS.Repository
 
         public async Task<Course?> GetCourseAsync(Guid id, bool trackChanges)
         {
-            return await FindByCondition(a => a.Id.Equals(id), trackChanges).FirstOrDefaultAsync();
+            return await FindByCondition(a => a.Id.Equals(id), trackChanges)
+                .Include(c => c.Modules)
+                .ThenInclude(m => m.Activities)
+                .ThenInclude(a => a.ActivityType)
+                .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Course>> GetCoursesAsync(bool trackChanges)
