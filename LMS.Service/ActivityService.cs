@@ -36,5 +36,16 @@ namespace LMS.Service
 
         }
 
+        public async Task<bool> DeleteActivityAsync(Guid id)
+        {
+            var activity = await _uow.Activity.GetActivityAsync(id, trackChanges: false);
+            if (activity == null)
+                return false;
+
+            _uow.Activity.Delete(activity);
+            await _uow.SaveAsync(); // Assuming you have a SaveAsync method in your Unit of Work
+            return true;
+        }
+
     }
 }
