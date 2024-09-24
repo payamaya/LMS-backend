@@ -12,3 +12,6 @@ GO
 
 DELETE FROM [dbo].[Activitys]
 GO
+
+DELETE FROM [dbo].[AspNetUsers]
+GO
