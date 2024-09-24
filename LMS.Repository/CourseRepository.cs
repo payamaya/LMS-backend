@@ -19,7 +19,7 @@ namespace LMS.Repository
                 .Include(c => c.Modules)
                 .ThenInclude(m => m.Activities)
                 .ThenInclude(a => a.ActivityType)
-                .Include(c => c.Users)
+                .Include(c => c.Students)
                 .FirstOrDefaultAsync();
         }
 

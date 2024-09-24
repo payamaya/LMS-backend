@@ -12,8 +12,11 @@ using LMS.Models.Entities;
 using LMS.Persistance;
 using LMS.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
+using System.Security.Claims;
 
 namespace LMS.Presentation.Controllers
 {
@@ -36,7 +39,7 @@ namespace LMS.Presentation.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        //[Authorize]
+        //[Authorize(Roles = "Teacher")]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
@@ -51,10 +54,11 @@ namespace LMS.Presentation.Controllers
         /// <param name="id">Hej hej</param>
         /// <returns></returns>
         [HttpGet("{id:guid}")]
+        [Authorize]
         [Produces("application/json")]
         public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
         {
-            var course = await _sm.CourseService.GetCourseAsync(id);
+            var course = await _sm.CourseService.GetCourseAsync(id, User);
 
             return Ok(course);
         }
