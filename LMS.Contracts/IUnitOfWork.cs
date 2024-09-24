@@ -8,5 +8,7 @@
         IActivityTypeRepository ActivityType { get; }
         IUserRepository User { get; }
         Task CompleteAsync();
+        //Delete 
+        Task SaveAsync();
     }
 }
