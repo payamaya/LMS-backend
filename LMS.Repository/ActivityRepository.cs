@@ -22,5 +22,10 @@ namespace LMS.Repository
         {
             return await FindAll(trackChanges).ToListAsync();
         }
+        public void DeleteActivity(Activity activity)
+        {
+            Delete(activity); // This will use the generic delete method in your repository base class
+        }
+
     }
 }
