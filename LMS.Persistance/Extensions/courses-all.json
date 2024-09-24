@@ -1,0 +1,170 @@
+[
+    {
+        "courseId": 1,
+        "courseName": "Computer Science Basics",
+        "description": "Introduction to computer science principles.",
+        "startDate": "2023-01-01",
+        "users": [
+            {
+                "userId": 101,
+                "name": "Alice Johnson",
+                "email": "alice.johnson@example.com"
+            },
+            {
+                "userId": 102,
+                "name": "Bob Smith",
+                "email": "bob.smith@example.com"
+            }
+        ],
+        "modules": [
+            {
+                "moduleId": 11,
+                "moduleName": "Introduction to Programming",
+                "description": "Learn the basics of programming using Python.",
+                "startDate": "2023-01-05",
+                "endDate": "2023-02-15",
+                "state": "completed",
+                "activities": [
+                    {
+                        "activityId": 112,
+                        "activityName": "Lecture 1: Variables and Data Types",
+                        "description": "Introduction to basic data types in Python.",
+                        "startTime": "2023-01-05T10:00:00",
+                        "endTime": "2023-01-05T11:00:00",
+                        "activityType": {
+                            "activityTypeId": 1,
+                            "activityTypeName": "Lecture"
+                        }
+                    },
+                    {
+                        "activityId": 112,
+                        "activityName": "Assignment 1: Basic Python Program",
+                        "description": "Create a simple Python program.",
+                        "startTime": "2023-01-07T10:00:00",
+                        "endTime": "2023-01-14T10:00:00",
+                        "activityType": {
+                            "activityTypeId": 2,
+                            "activityTypeName": "Assignment"
+                        }
+                    }
+                ]
+            },
+            {
+                "moduleId": 12,
+                "moduleName": "Data Structures",
+                "description": "An introduction to common data structures.",
+                "startDate": "2023-02-20",
+                "endDate": "2023-04-10",
+                "state": "in-progress",
+                "activities": [
+                    {
+                        "activityId": 123,
+                        "activityName": "Lecture 1: Arrays and Linked Lists",
+                        "description": "Overview of arrays and linked lists.",
+                        "startTime": "2023-02-20T10:00:00",
+                        "endTime": "2023-02-20T11:00:00",
+                        "activityType": {
+                            "activityTypeId": 1,
+                            "activityTypeName": "Lecture"
+                        }
+                    },
+                    {
+                        "activityId": 124,
+                        "activityName": "Assignment 1: Implement a Linked List",
+                        "description": "Implement a simple linked list in Python.",
+                        "startTime": "2023-02-22T10:00:00",
+                        "endTime": "2023-03-01T10:00:00",
+                        "activityType": {
+                            "activityTypeId": 2,
+                            "activityTypeName": "Assignment"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "courseId": 2,
+        "courseName": "Web Development",
+        "description": "Introduction to Web development.",
+        "startDate": "2023-01-01",
+        "users": [
+            {
+                "userId": 201,
+                "name": "Jeff Pearson",
+                "email": "jeff.pearson@example.com"
+            },
+            {
+                "userId": 202,
+                "name": "Jerry Thompson",
+                "email": "jerry.thompson@example.com"
+            }
+        ],
+        "modules": [
+            {
+                "moduleId": 21,
+                "moduleName": "Introduction to Webdevelopment",
+                "description": "Learn the basics of programming using HTML and CSS.",
+                "startDate": "2023-01-05",
+                "endDate": "2023-02-15",
+                "state": "not-started",
+                "activities": [
+                    {
+                        "activityId": 212,
+                        "activityName": "Lecture 1: tags and classes",
+                        "description": "Introduction to basic tags and classes in HTML and CSS.",
+                        "startTime": "2023-01-05T10:00:00",
+                        "endTime": "2023-01-05T11:00:00",
+                        "activityType": {
+                            "activityTypeId": 1,
+                            "activityTypeName": "Lecture"
+                        }
+                    },
+                    {
+                        "activityId": 212,
+                        "activityName": "Assignment 1: Basic web page",
+                        "description": "Create a simple HTML page with css.",
+                        "startTime": "2023-01-07T10:00:00",
+                        "endTime": "2023-01-14T10:00:00",
+                        "activityType": {
+                            "activityTypeId": 2,
+                            "activityTypeName": "Assignment"
+                        }
+                    }
+                ]
+            },
+            {
+                "moduleId": 22,
+                "moduleName": "Introduction to JavaScript",
+                "description": "An introduction to basic JavaScript.",
+                "startDate": "2023-02-20",
+                "endDate": "2023-04-10",
+                "state": "not-started",
+                "activities": [
+                    {
+                        "activityId": 223,
+                        "activityName": "Lecture 1: Arrays and Linked Lists",
+                        "description": "Overview of arrays and linked lists.",
+                        "startTime": "2023-02-20T10:00:00",
+                        "endTime": "2023-02-20T11:00:00",
+                        "activityType": {
+                            "activityTypeId": 1,
+                            "activityTypeName": "Lecture"
+                        }
+                    },
+                    {
+                        "activityId": 224,
+                        "activityName": "Assignment 1: Implement a Linked List",
+                        "description": "Implement a simple linked list in JavaScript.",
+                        "startTime": "2023-02-22T10:00:00",
+                        "endTime": "2023-03-01T10:00:00",
+                        "activityType": {
+                            "activityTypeId": 2,
+                            "activityTypeName": "Assignment"
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+]

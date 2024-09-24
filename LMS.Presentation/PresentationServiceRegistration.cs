@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Text.Json.Serialization;
 using System.Reflection;
 using Microsoft.OpenApi.Models;
+using Microsoft.Extensions.Options;
 
 namespace LMS.Presentation
 {
@@ -41,7 +42,11 @@ namespace LMS.Presentation
                 opts.JsonSerializerOptions.Converters.Add(enumConverter);
                 opts.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault | JsonIgnoreCondition.WhenWritingNull;
             })
-            .AddNewtonsoftJson(option => option.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
+            .AddNewtonsoftJson(option =>
+            {
+                option.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                option.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            });
             //.AddXmlSerializerFormatters(); // Can return XML
 
             //services.AddSwaggerGen(options =>

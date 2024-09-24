@@ -36,7 +36,7 @@ namespace LMS.Presentation.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize]
+        //[Authorize]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
@@ -55,11 +55,6 @@ namespace LMS.Presentation.Controllers
         public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
         {
             var course = await _sm.CourseService.GetCourseAsync(id);
-
-            if (course == null)
-            {
-                return NotFound();
-            }
 
             return Ok(course);
         }
