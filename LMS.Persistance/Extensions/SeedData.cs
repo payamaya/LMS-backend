@@ -1,4 +1,6 @@
-﻿using LMS.Models.Entities;
+﻿using Bogus;
+
+using LMS.Models.Entities;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,11 +11,11 @@ namespace LMS.Persistance.Extensions
 {
     public static class SeedData
     {
-        private static UserManager<User> userManager = null!;
-        private static RoleManager<IdentityRole> roleManager = null!;
-        private static IConfiguration configuration = null!;
-        private const string studentRole = "Student";
-        private const string teacherRole = "Teacher";
+        private static UserManager<User> _userManager = null!;
+        private static RoleManager<IdentityRole> _roleManager = null!;
+        private static IConfiguration _configuration = null!;
+        private const string _studentRole = "Student";
+        private const string _teacherRole = "Teacher";
 
         public static async Task SeedDataAsync(this IApplicationBuilder builder)
         {
@@ -24,9 +26,12 @@ namespace LMS.Persistance.Extensions
 
                 if (await db.Courses.AnyAsync()) return;
 
-                userManager = servicesProvider.GetRequiredService<UserManager<User>>();
-                roleManager = servicesProvider.GetRequiredService<RoleManager<IdentityRole>>();
-                configuration = servicesProvider.GetRequiredService<IConfiguration>();
+                _userManager = servicesProvider.GetRequiredService<UserManager<User>>()
+                    ?? throw new Exception("UserManager not exits in DI");
+                _roleManager = servicesProvider.GetRequiredService<RoleManager<IdentityRole>>()
+                    ?? throw new Exception("RoleManager not exits in DI");
+                _configuration = servicesProvider.GetRequiredService<IConfiguration>()
+                    ?? throw new Exception("Configuration not exits in DI");
 
                 try
                 {
@@ -50,9 +55,15 @@ namespace LMS.Persistance.Extensions
                         var activities = GenerateActivities(modules, activityTypes);
                         await db.Activitys.AddRangeAsync(activities);
 
-                        await CreateRolesAsync(new[] { teacherRole, studentRole });
- 
+                        await CreateRolesAsync(new[] { _teacherRole, _studentRole });
+
                         await db.SaveChangesAsync();
+
+                        var users = await GenerateUsersForCourse(
+                            courses,
+                            //teachers[i],
+                            count: 12);
+                        //await db.Users.AddRangeAsync(users);
                     }
 
                     //DateTime.Parse("2024-03-24");
@@ -260,21 +271,57 @@ namespace LMS.Persistance.Extensions
         {
             foreach (var roleName in roleNames)
             {
-                if (await roleManager.RoleExistsAsync(roleName)) continue;
+                if (await _roleManager.RoleExistsAsync(roleName)) continue;
+
                 var role = new IdentityRole { Name = roleName };
-                var result = await roleManager.CreateAsync(role);
-                if (!result.Succeeded) throw new Exception(string.Join("\n", result.Errors));
+                var result = await _roleManager.CreateAsync(role);
+                if (!result.Succeeded)
+                    throw new Exception(string.Join("\n", result.Errors));
             }
         }
 
-        /*    private static IEnumerable<Director> GenerateDirectors(int count)
+        private async static Task<IEnumerable<User>> GenerateUsersForCourse(
+            List<Course> courses,
+            //string myName,
+            int count)
+        {
+            var users = new List<User>();
+            var teachers = new string[] { "mfl", "pos" };
+            for (int i = 0; i < courses.Count; i++)
             {
-                var faker = new Faker<Director>()
-                    .RuleFor(d => d.Name, f => f.Person.FullName)
-                    .RuleFor(d => d.DateOfBirth, f => f.Date.Past(50, DateTime.Now.AddYears(-30)));
+                var faker = new Faker<User>()
+                    .RuleFor(u => u.UserName, f => f.Person.UserName)
+                    .RuleFor(u => u.Name, f => f.Person.FullName)
+                    .RuleFor(u => u.Email, f => f.Internet.Email())
+                    .RuleFor(u => u.IsStudent, true)
+                    .RuleFor(u => u.Course, courses[i]);
 
-                return faker.Generate(count);
-            }*/
+                users.AddRange(faker.Generate(count));
+                users.Add(new User
+                {
+                    Name = $"{teachers[i]} {teachers[i]}",
+                    UserName = teachers[i],
+                    Email = $"{teachers[i]}.{teachers[i]}@mail.se",
+                    Course = courses[i],
+                    IsStudent = false
+                });
+            }
+
+            var password = _configuration["password"]
+                ?? throw new Exception("password not exist in config"); // From secret
+
+            foreach (var user in users)
+            {
+                var result = await _userManager.CreateAsync(user, password);
+                if (!result.Succeeded)
+                    throw new Exception(string.Join("\n", result.Errors));
+
+                await _userManager.AddToRoleAsync(user, user.IsStudent
+                    ? _studentRole : _teacherRole);
+            }
+
+            return users;
+        }
 
         /*    private static IEnumerable<ContactInformation> GenerateContactInformation(int count)
             {
