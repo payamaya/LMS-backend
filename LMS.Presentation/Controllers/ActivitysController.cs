@@ -67,15 +67,15 @@ namespace LMS.Presentation.Controllers
 
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        /*     [HttpPut("{id}")]
-             public async Task<IActionResult> PutCourse(int id, Course course)
+             [HttpPut("{id}")]
+             public async Task<IActionResult> PutActivity(Guid id, Activity activity)
              {
-                 if (id != course.Id)
+                 if (id != activity.Id)
                  {
                      return BadRequest();
                  }
 
-                 _context.Entry(course).State = EntityState.Modified;
+                 _context.Entry(activity).State = EntityState.Modified;
 
                  try
                  {
@@ -83,7 +83,7 @@ namespace LMS.Presentation.Controllers
                  }
                  catch (DbUpdateConcurrencyException)
                  {
-                     if (!CourseExists(id))
+                     if (!ActivityExists(id))
                      {
                          return NotFound();
                      }
@@ -94,7 +94,9 @@ namespace LMS.Presentation.Controllers
                  }
 
                  return NoContent();
-             }*/
+             }
+
+     
 
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -109,23 +111,21 @@ namespace LMS.Presentation.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourse(int id)
+        public async Task<IActionResult> DeleteActivityAsync(Guid id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
+            var activityExists = await _sm.ActivityService.DeleteActivityAsync(id);
+            if (!activityExists)
             {
-                return NotFound();
+                return NotFound($"Activity with ID '{id}' not found.");
             }
-
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
-
             return NoContent();
         }
 
-        /*private bool CourseExists(int id)
+        private bool ActivityExists(Guid id)
         {
-            return _context.Courses.Any(e => e.Id == id);
-        }*/
+            return _context.Activitys.Any(a => a.Id == id);
+        }
+
     }
 }
+
