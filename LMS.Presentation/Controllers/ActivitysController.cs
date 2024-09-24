@@ -109,17 +109,17 @@ namespace LMS.Presentation.Controllers
             return CreatedAtAction("GetCourse", new { id = course.Id }, course);
         }
 
+
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivityAsync(Guid id)
         {
-            var activityExists = await _sm.ActivityService.DeleteActivityAsync(id);
-            if (!activityExists)
-            {
-                return NotFound($"Activity with ID '{id}' not found.");
-            }
+            await _sm.ActivityService.DeleteActivityAsync(id);
             return NoContent();
         }
+
+
+
 
         private bool ActivityExists(Guid id)
         {
