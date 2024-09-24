@@ -101,12 +101,12 @@ namespace LMS.Presentation.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Activity>> PostActivity(Activity activity)
         {
-            _context.Courses.Add(course);
+            _context.Activitys.Add(activity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            return CreatedAtAction("Pso ACtivity", new { id = activity.Id }, activity);
         }
 
 
@@ -115,6 +115,7 @@ namespace LMS.Presentation.Controllers
         public async Task<IActionResult> DeleteActivityAsync(Guid id)
         {
             await _sm.ActivityService.DeleteActivityAsync(id);
+
             return NoContent();
         }
 

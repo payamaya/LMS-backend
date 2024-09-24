@@ -10,5 +10,7 @@ namespace LMS.Service.Contracts
         Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, bool trackChanges = false);
         Task<CourseDetailedDto?> GetCourseAsync(ClaimsPrincipal? user, bool trackChanges = false);
         Task<IEnumerable<CourseDto>> GetCoursesAsync(bool trackChanges = false);
+
+        Task DeleteCourseAsync(Guid id);
     }
 }

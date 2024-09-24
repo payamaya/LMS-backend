@@ -133,17 +133,14 @@ namespace LMS.Presentation.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
+<<<<<<< HEAD
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> DeleteCourse(int id)
+=======
+        public async Task<IActionResult> DeleteCourseAsync(Guid id)
+>>>>>>> 6284b88 (Delete Method for All controller except user and activityType not finished yet)
         {
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
+            await _sm.CourseService.DeleteCourseAsync(id);
 
             return NoContent();
         }

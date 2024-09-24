@@ -29,5 +29,10 @@ namespace LMS.Repository
                 .Include(c => c.Users)
                 .ToListAsync();
         }
+
+        public void DeleteCourse(Course course)
+        {
+            Delete(course); 
+        }
     }
 }

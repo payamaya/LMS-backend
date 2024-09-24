@@ -98,31 +98,24 @@ namespace LMS.Presentation.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Module>> PostModule(Module module)
         {
-            _context.Courses.Add(course);
+            _context.Modules.Add(module);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            return CreatedAtAction("Get Module", new { id = module.Id }, module);
         }
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourse(int id)
+        public async Task<IActionResult> DeleteActivityModule(Guid id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
+            await _sm.ModuleService.DeleteModuleAsync(id);
 
             return NoContent();
         }
 
-        /*private bool CourseExists(int id)
+       /* private bool CourseExists(int id)
         {
             return _context.Courses.Any(e => e.Id == id);
         }*/

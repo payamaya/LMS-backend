@@ -45,6 +45,7 @@ namespace LMS.Service
             _uow.Activity.Delete(activitiy);
             await _uow.CompleteAsync(); 
         }
-        private async Task<Activity?> GetActivityBy(Guid id) => await _uow.Activity.GetActivityAsync(id, trackChanges:false);
+        private async Task<Activity?> GetActivityBy(Guid id) => 
+            await _uow.Activity.GetActivityAsync(id, trackChanges:false);
     }
 }
