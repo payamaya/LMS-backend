@@ -6,5 +6,6 @@ namespace LMS.Service.Contracts
     {
         Task<ActivityDto?> GetActivityAsync(Guid courseId, bool trackChanges = false);
         Task<IEnumerable<ActivityDto>> GetActivitiesAsync(bool trackChanges = false);
+        Task<bool> DeleteActivityAsync(Guid id);
     }
 }
