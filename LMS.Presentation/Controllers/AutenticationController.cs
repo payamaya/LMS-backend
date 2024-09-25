@@ -28,6 +28,7 @@ public class AutenticationController : ControllerBase
     /// <param name="userForRegistration"></param>
     /// <returns></returns>
     [HttpPost]
+    [Authorize(Roles = "Teacher")]
     public async Task<IActionResult> RegisterUser(UserForRegistrationDto userForRegistration)
     {
         var result = await _serviceManager.AuthService.RegisterUserAsync(userForRegistration);

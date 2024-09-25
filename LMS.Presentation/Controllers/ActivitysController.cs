@@ -19,6 +19,7 @@ namespace LMS.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Teacher")]
     public class ActivitiesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -66,15 +67,15 @@ namespace LMS.Presentation.Controllers
 
         // PUT: api/Courses/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        /*     [HttpPut("{id}")]
-             public async Task<IActionResult> PutCourse(int id, Course course)
+             [HttpPut("{id}")]
+             public async Task<IActionResult> PutActivity(Guid id, Activity activity)
              {
-                 if (id != course.Id)
+                 if (id != activity.Id)
                  {
                      return BadRequest();
                  }
 
-                 _context.Entry(course).State = EntityState.Modified;
+                 _context.Entry(activity).State = EntityState.Modified;
 
                  try
                  {
@@ -82,7 +83,7 @@ namespace LMS.Presentation.Controllers
                  }
                  catch (DbUpdateConcurrencyException)
                  {
-                     if (!CourseExists(id))
+                     if (!ActivityExists(id))
                      {
                          return NotFound();
                      }
@@ -93,38 +94,39 @@ namespace LMS.Presentation.Controllers
                  }
 
                  return NoContent();
-             }*/
+             }
+
+     
 
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Course>> PostCourse(Course course)
+        public async Task<ActionResult<Activity>> PostActivity(Activity activity)
         {
-            _context.Courses.Add(course);
+            _context.Activitys.Add(activity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCourse", new { id = course.Id }, course);
+            return CreatedAtAction("Pso ACtivity", new { id = activity.Id }, activity);
         }
+
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourse(int id)
+        public async Task<IActionResult> DeleteActivityAsync(Guid id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
+            await _sm.ActivityService.DeleteActivityAsync(id);
 
             return NoContent();
         }
 
-        /*private bool CourseExists(int id)
+
+
+
+        private bool ActivityExists(Guid id)
         {
-            return _context.Courses.Any(e => e.Id == id);
-        }*/
+            return _context.Activitys.Any(a => a.Id == id);
+        }
+
     }
 }
+

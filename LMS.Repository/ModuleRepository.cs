@@ -22,5 +22,9 @@ namespace LMS.Repository
         {
             return await FindAll(trackChanges).ToListAsync();
         }
+        public void DeleteModule(Module module)
+        {
+            Delete(module);
+        }
     }
 }

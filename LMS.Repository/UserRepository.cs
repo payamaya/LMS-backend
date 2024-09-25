@@ -21,5 +21,10 @@ namespace LMS.Repository
         {
             return await FindAll(trackChanges).ToListAsync();
         }
+
+        public void DeleteUser(User user)
+        {
+            Delete(user);
+        }
     }
 }

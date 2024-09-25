@@ -8,10 +8,6 @@
         public DateTime EndTime { get; init; }
         public string Description { get; init; }
 
-        public Guid ModuleId { get; init; }
-        public ModuleDto Module { get; init; }
-
-        public Guid ActivityTypeId { get; init; }
         public ActivityTypeDto ActivityType { get; init; }
     }
 }

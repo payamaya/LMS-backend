@@ -19,6 +19,7 @@ namespace LMS.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Teacher")]
     public class ActivityTypesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

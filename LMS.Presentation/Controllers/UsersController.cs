@@ -19,6 +19,7 @@ namespace LMS.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Teacher")]
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -108,16 +109,9 @@ namespace LMS.Presentation.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCourse(int id)
+        public async Task<IActionResult> DeleteActivityUser(Guid id)
         {
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
+            await _sm.UserService.DeleteUserAsync(id);
 
             return NoContent();
         }

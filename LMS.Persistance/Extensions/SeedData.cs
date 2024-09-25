@@ -118,8 +118,8 @@ namespace LMS.Persistance.Extensions
                 {
                     ActivityName = "Lecture 1: Variables and Data Types",
                     Description = "Introduction to basic data types in Python",
-                    StartTime = DateTime.Parse("2023-01-05"),
-                    EndTime = DateTime.Parse("2023-01-05"),
+                    StartTime = DateTime.Parse("2023-01-05T12:00:00"),
+                    EndTime = DateTime.Parse("2023-01-05T14:00:00"),
                     Module = modules[0],
                     ActivityType = activityTypes[0]
                 },
@@ -127,8 +127,8 @@ namespace LMS.Persistance.Extensions
                 {
                     ActivityName = "Assignment 1: Basic Python Program",
                     Description = "Create a simple Python program.",
-                    StartTime = DateTime.Parse("2023-01-07"),
-                    EndTime = DateTime.Parse("2023-01-14"),
+                    StartTime = DateTime.Parse("2023-01-07T12:00:00"),
+                    EndTime = DateTime.Parse("2023-01-14T00:00:00"),
                     Module = modules[0],
                     ActivityType = activityTypes[1]
                 },
@@ -136,8 +136,8 @@ namespace LMS.Persistance.Extensions
                 {
                     ActivityName = "Lecture 1: Arrays and Linked Lists",
                     Description = "Overview of arrays and linked lists.",
-                    StartTime = DateTime.Parse("2023-02-20"),
-                    EndTime = DateTime.Parse("2023-02-20"),
+                    StartTime = DateTime.Parse("2023-02-20T09:00:00"),
+                    EndTime = DateTime.Parse("2023-02-21T00:00:00"),
                     Module = modules[1],
                     ActivityType = activityTypes[0]
                 },
@@ -145,8 +145,8 @@ namespace LMS.Persistance.Extensions
                 {
                     ActivityName = "Assignment 1: Implement a Linked List",
                     Description = "Implement a simple linked list in Python.",
-                    StartTime = DateTime.Parse("2023-02-22"),
-                    EndTime = DateTime.Parse("2023-03-01"),
+                    StartTime = DateTime.Parse("2023-02-22T10:00:00"),
+                    EndTime = DateTime.Parse("2023-03-01T00:00:00"),
                     Module = modules[1],
                     ActivityType = activityTypes[2]
                 },
@@ -154,8 +154,8 @@ namespace LMS.Persistance.Extensions
                 {
                     ActivityName = "Lecture 2: Variables and Data Types",
                     Description = "Introduction to basic data types in Python",
-                    StartTime = DateTime.Parse("2023-01-05"),
-                    EndTime = DateTime.Parse("2023-01-05"),
+                    StartTime = DateTime.Parse("2023-01-05T09:00:00"),
+                    EndTime = DateTime.Parse("2023-01-05T11:30:00"),
                     Module = modules[2],
                     ActivityType = activityTypes[0]
                 },
@@ -163,8 +163,8 @@ namespace LMS.Persistance.Extensions
                 {
                     ActivityName = "Assignment 2: Basic Python Program",
                     Description = "Create a simple Python program.",
-                    StartTime = DateTime.Parse("2023-01-07"),
-                    EndTime = DateTime.Parse("2023-01-14"),
+                    StartTime = DateTime.Parse("2023-01-07T12:00:00"),
+                    EndTime = DateTime.Parse("2023-01-14T00:00:00"),
                     Module = modules[2],
                     ActivityType = activityTypes[1]
                 },
@@ -172,8 +172,8 @@ namespace LMS.Persistance.Extensions
                 {
                     ActivityName = "Lecture 2: Arrays and Linked Lists",
                     Description = "Overview of arrays and linked lists.",
-                    StartTime = DateTime.Parse("2023-02-20"),
-                    EndTime = DateTime.Parse("2023-02-20"),
+                    StartTime = DateTime.Parse("2023-02-20T13:00:00"),
+                    EndTime = DateTime.Parse("2023-02-20T15:00:00"),
                     Module = modules[3],
                     ActivityType = activityTypes[0]
                 },
@@ -181,8 +181,8 @@ namespace LMS.Persistance.Extensions
                 {
                     ActivityName = "Assignment 2: Implement a Linked List",
                     Description = "Implement a simple linked list in Python.",
-                    StartTime = DateTime.Parse("2023-02-22"),
-                    EndTime = DateTime.Parse("2023-03-01"),
+                    StartTime = DateTime.Parse("2023-02-22T12:00:00"),
+                    EndTime = DateTime.Parse("2023-03-01T00:00:00"),
                     Module = modules[3],
                     ActivityType = activityTypes[2]
                 }
@@ -205,16 +205,16 @@ namespace LMS.Persistance.Extensions
                 {
                     ModuleName = "Data Structures",
                     Description = "An introduction to common data structures.",
-                    StartDate = DateTime.Parse("2023-02-20"),
-                    EndDate = DateTime.Parse("2023-04-10"),
+                    StartDate = DateTime.Parse("2024-09-10"),
+                    EndDate = DateTime.Parse("2024-11-10"),
                     Course = courses[0]
                 },
                 new Module
                 {
                     ModuleName = "Introduction to Webdevelopment",
                     Description = "Learn the basics of programming using HTML and CSS.",
-                    StartDate = DateTime.Parse("2023-01-05"),
-                    EndDate = DateTime.Parse("2023-02-15"),
+                    StartDate = DateTime.Parse("2026-01-05"),
+                    EndDate = DateTime.Parse("2026-02-15"),
                     Course = courses[1]
                 },
                 new Module

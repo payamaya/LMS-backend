@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LMS.Application.Exceptions;
 using LMS.Contracts;
 using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
@@ -36,5 +37,15 @@ namespace LMS.Service
 
         }
 
+        public async Task DeleteActivityAsync(Guid id)
+        {
+
+         var activitiy = await GetActivityBy(id) 
+                ?? throw new NotFoundException("Acitivity" , id);
+            _uow.Activity.Delete(activitiy);
+            await _uow.CompleteAsync(); 
+        }
+        private async Task<Activity?> GetActivityBy(Guid id) => 
+            await _uow.Activity.GetActivityAsync(id, trackChanges:false);
     }
 }

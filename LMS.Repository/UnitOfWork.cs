@@ -51,6 +51,11 @@ namespace LMS.Repository
 
         public async Task CompleteAsync()
         {
+            await SaveAsync();
+        }
+
+        public async Task SaveAsync()
+        {
             await _context.SaveChangesAsync();
         }
     }

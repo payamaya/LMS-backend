@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using LMS.Application.Exceptions;
 using LMS.Contracts;
 using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
@@ -32,5 +33,16 @@ namespace LMS.Service
 
             return _mapper.Map<IEnumerable<UserDto>>(users);
         }
+
+        public async Task DeleteUserAsync(Guid id)
+        {
+
+            var user = await GetUserBy(id)
+                   ?? throw new NotFoundException("User", id);
+            _uow.User.Delete(user);
+            await _uow.CompleteAsync();
+        }
+        private async Task<User?> GetUserBy(Guid id) =>
+            await _uow.User.GetUserAsync(id, trackChanges: false);
     }
 }

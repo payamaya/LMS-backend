@@ -2,7 +2,7 @@
 {
     public record UserDto
     {
-        //public int Id { get; set; }
+        public Guid Id { get; init; }
         public string Name { get; init; }
         //public string Email { get; init}
 
