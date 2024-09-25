@@ -205,16 +205,16 @@ namespace LMS.Persistance.Extensions
                 {
                     ModuleName = "Data Structures",
                     Description = "An introduction to common data structures.",
-                    StartDate = DateTime.Parse("2023-02-20"),
-                    EndDate = DateTime.Parse("2023-04-10"),
+                    StartDate = DateTime.Parse("2024-09-10"),
+                    EndDate = DateTime.Parse("2024-11-10"),
                     Course = courses[0]
                 },
                 new Module
                 {
                     ModuleName = "Introduction to Webdevelopment",
                     Description = "Learn the basics of programming using HTML and CSS.",
-                    StartDate = DateTime.Parse("2023-01-05"),
-                    EndDate = DateTime.Parse("2023-02-15"),
+                    StartDate = DateTime.Parse("2026-01-05"),
+                    EndDate = DateTime.Parse("2026-02-15"),
                     Course = courses[1]
                 },
                 new Module
