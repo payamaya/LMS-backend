@@ -47,9 +47,9 @@ namespace LMS.Service
             return _mapper.Map<CourseDetailedDto>(course);
         }
 
+        // Bad request should never reach here, sent to Unauthorized middleware
         public async Task<CourseDetailedDto?> GetCourseAsync(ClaimsPrincipal? userClaim, bool trackChanges = false)
         {
-            //ClaimsPrincipal user = User;
             if (userClaim == null) throw new BadRequestException($"Bad user claims");
 
             var user = await _userManager.GetUserAsync(userClaim);

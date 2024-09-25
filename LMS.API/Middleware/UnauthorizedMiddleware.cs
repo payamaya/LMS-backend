@@ -22,6 +22,11 @@ namespace LMS.API.Middleware
                 // Du kan här hantera 401-svaret
                 await HandleUnauthorizedAsync(context);
             }
+            else if (context.Response.StatusCode == StatusCodes.Status403Forbidden)
+            {
+                // Du kan här hantera 401-svaret
+                await HandleForbiddenAsync(context);
+            }
         }
 
         private Task HandleUnauthorizedAsync(HttpContext context)
@@ -33,6 +38,26 @@ namespace LMS.API.Middleware
             {
                 status = StatusCodes.Status401Unauthorized,
                 title = "Unauthorized",
+                traceId = context.TraceIdentifier,
+                detail = "Access to this resource is denied due to invalid credentials."
+            };
+
+            // Returnera JSON som svar
+            var jsonResponse = JsonSerializer.Serialize(response);
+            context.Response.ContentLength = jsonResponse.Length; // Uppdatera content-length
+            return context.Response.WriteAsync(jsonResponse);
+            //return context.Response.WriteAsJsonAsync(response);
+        }
+
+        private Task HandleForbiddenAsync(HttpContext context)
+        {
+            // Anpassa meddelandet för 403-svaret
+            context.Response.ContentType = "application/json";
+
+            var response = new
+            {
+                status = StatusCodes.Status403Forbidden,
+                title = "Forbidden",
                 traceId = context.TraceIdentifier,
                 detail = "Access to this resource is denied due to invalid credentials."
             };
