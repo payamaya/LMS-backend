@@ -54,7 +54,7 @@ namespace LMS.Presentation.Controllers
         /// <param name="id">Hej hej</param>
         /// <returns></returns>
         [HttpGet("{id:guid}")]
-        [Authorize]
+        //[Authorize]
         [Produces("application/json")]
         public async Task<ActionResult<CourseDetailedDto>> GetCourse(Guid id)
         {
