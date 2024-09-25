@@ -12,5 +12,6 @@ namespace LMS.Service.Contracts
         Task<IEnumerable<CourseDto>> GetCoursesAsync(bool trackChanges = false);
 
         Task DeleteCourseAsync(Guid id);
+        Task CreateCourseAsync(CourseDto courseDto);
     }
 }
