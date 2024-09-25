@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+using System.Runtime.CompilerServices;
 using System.Security.Claims;
 
 namespace LMS.Presentation.Controllers
@@ -39,7 +40,10 @@ namespace LMS.Presentation.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        //[Authorize]
         //[Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Student")]
+        [Authorize(Roles = "Teacher")]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
@@ -51,14 +55,35 @@ namespace LMS.Presentation.Controllers
         /// <summary>
         /// Hur gör man det här, 3 * /
         /// </summary>
+        /// <returns></returns>
+        [HttpGet("Student")]
+        //[Authorize]
+        //[Authorize(Roles = "Teacher")]
+        //[OverrideAuthorization]
+        [Authorize(Roles = "Student")]
+        [Produces("application/json")]
+        public async Task<ActionResult<CourseDetailedDto>> GetCourse()
+        {
+            var course = await _sm.CourseService.GetCourseAsync(User);
+
+            return Ok(course);
+        }
+
+        // GET: api/Courses/5
+        /// <summary>
+        /// Hur gör man det här, 3 * /
+        /// </summary>
         /// <param name="id">Hej hej</param>
         /// <returns></returns>
         [HttpGet("{id:guid}")]
         //[Authorize]
+        //[Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Student")]
+        [Authorize(Roles = "Teacher")]
         [Produces("application/json")]
         public async Task<ActionResult<CourseDetailedDto>> GetCourse(Guid id)
         {
-            var course = await _sm.CourseService.GetCourseAsync(id, User);
+            var course = await _sm.CourseService.GetCourseAsync(id);
 
             return Ok(course);
         }
@@ -97,6 +122,7 @@ namespace LMS.Presentation.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "Teacher")]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
             _context.Courses.Add(course);
@@ -107,6 +133,7 @@ namespace LMS.Presentation.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> DeleteCourse(int id)
         {
             var course = await _context.Courses.FindAsync(id);

@@ -29,22 +29,32 @@ namespace LMS.Service
             _mapper = mapper;
         }
 
-        public async Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, ClaimsPrincipal? userClaim, bool trackChanges = false)
+        public async Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
         {
-            //ClaimsPrincipal user = User;
-            if (userClaim != null)
+            var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
+            if (course is null)
             {
-                var user = await _userManager.GetUserAsync(userClaim);
-                if (user != null)
-                {
-                    var roles = await _userManager.GetRolesAsync(user);
-                    if (roles != null && roles.Contains("Student"))
-                    {
-                        courseId = (Guid)user.CourseId!;
-                    }
-                }
+                throw new NotFoundException(nameof(GetCourseAsync), courseId);
+                //return null; //ToDo: Fix later
             }
 
+            return _mapper.Map<CourseDetailedDto>(course);
+        }
+
+        public async Task<CourseDetailedDto?> GetCourseAsync(ClaimsPrincipal? userClaim, bool trackChanges = false)
+        {
+            //ClaimsPrincipal user = User;
+            if (userClaim == null) throw new BadRequestException($"Bad user claims");
+
+            var user = await _userManager.GetUserAsync(userClaim);
+            if (user == null) throw new BadRequestException($"User not found");
+
+            var roles = await _userManager.GetRolesAsync(user);
+            if (roles == null || !roles.Contains("Student"))
+                throw new BadRequestException($"Role not found");
+            
+            var courseId = (Guid)user.CourseId!;
+            
             var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
             if (course is null)
             {
