@@ -56,7 +56,7 @@ namespace LMS.Presentation.Controllers
         [HttpGet("{id:guid}")]
         [Authorize]
         [Produces("application/json")]
-        public async Task<ActionResult<CourseDto>> GetCourse(Guid id)
+        public async Task<ActionResult<CourseDetailedDto>> GetCourse(Guid id)
         {
             var course = await _sm.CourseService.GetCourseAsync(id, User);
 

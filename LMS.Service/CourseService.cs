@@ -29,7 +29,7 @@ namespace LMS.Service
             _mapper = mapper;
         }
 
-        public async Task<CourseDto?> GetCourseAsync(Guid courseId, ClaimsPrincipal? userClaim, bool trackChanges = false)
+        public async Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, ClaimsPrincipal? userClaim, bool trackChanges = false)
         {
             //ClaimsPrincipal user = User;
             if (userClaim != null)
@@ -52,7 +52,7 @@ namespace LMS.Service
                 //return null; //ToDo: Fix later
             }
 
-            return _mapper.Map<CourseDto>(course);
+            return _mapper.Map<CourseDetailedDto>(course);
         }
 
         public async Task<IEnumerable<CourseDto>> GetCoursesAsync(bool trackChanges = false)

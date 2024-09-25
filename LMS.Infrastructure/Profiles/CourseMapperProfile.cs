@@ -8,7 +8,7 @@ namespace LMS.Infrastructure.Profiles
     {
         public CourseMapperProfile()
         {
-            CreateMap<Course, CourseDto>()
+            CreateMap<Course, CourseDetailedDto>()
                 .ForMember(
                     dest => dest.Teacher,
                     opt => opt.MapFrom(
@@ -19,20 +19,21 @@ namespace LMS.Infrastructure.Profiles
                     opt => opt.MapFrom(
                         src => src.Users!
                             .Where(u => u.IsStudent).ToList()));
-            //.ConstructUsing(src => new CourseDto
-            //{
-            //    Id = src.Id,
-            //    CourseName = src.CourseName,
-            //    Description = src.Description,
-            //    StartDate = src.StartDate,
-            //    Modules = src.Modules.Select,
-            //    Students = src.Students
-            //}); ;
+
+            CreateMap<Course, CourseDto>()
+                .ForMember(
+                    dest => dest.Teacher,
+                    opt => opt.MapFrom(
+                        src => src.Users!
+                            .Where(u => !u.IsStudent).FirstOrDefault()));
+
             CreateMap<User, UserDto>();
+
             CreateMap<Module, ModuleDto>();
+
             CreateMap<Activity, ActivityDto>();
-            CreateMap<ActivityType, ActivityTypeDto>();
-            
+
+            CreateMap<ActivityType, ActivityTypeDto>();            
         }
     }
 }

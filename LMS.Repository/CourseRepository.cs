@@ -17,15 +17,17 @@ namespace LMS.Repository
         {
             return await FindByCondition(a => a.Id.Equals(id), trackChanges)
                 .Include(c => c.Modules)
-                .ThenInclude(m => m.Activities)
-                .ThenInclude(a => a.ActivityType)
+                    .ThenInclude(m => m.Activities)
+                    .ThenInclude(a => a.ActivityType)
                 .Include(c => c.Users)
                 .FirstOrDefaultAsync();
         }
 
         public async Task<IEnumerable<Course>> GetCoursesAsync(bool trackChanges)
         {
-            return await FindAll(trackChanges).ToListAsync();
+            return await FindAll(trackChanges)
+                .Include(c => c.Users)
+                .ToListAsync();
         }
     }
 }
