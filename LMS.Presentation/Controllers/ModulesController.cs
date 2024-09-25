@@ -36,7 +36,6 @@ namespace LMS.Presentation.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        //[Authorize]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<ModuleDto>>> GetModules()
         {
