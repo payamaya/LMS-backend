@@ -282,31 +282,17 @@ namespace LMS.Persistance.Extensions
 
         private async static Task<IEnumerable<User>> GenerateUsersForCourse(
             List<Course> courses,
-            //string myName,
             int count)
         {
-            var users = new List<User>();
-            var teachers = new string[] { "teacher", "student" };
-            var isStudent = new bool[] { false, true };
-            for (int i = 0; i < courses.Count; i++)
-            {
-                var faker = new Faker<User>()
-                    .RuleFor(u => u.UserName, f => f.Person.UserName)
-                    .RuleFor(u => u.Name, f => f.Person.FullName)
-                    .RuleFor(u => u.Email, f => f.Internet.Email())
-                    .RuleFor(u => u.IsStudent, true)
-                    .RuleFor(u => u.Course, courses[i]);
+            var users = GetUsers(courses[0], count);
+            users[0].IsStudent = false;
+            users[0].UserName = "teacher";
 
-                users.AddRange(faker.Generate(count));
-                users.Add(new User
-                {
-                    Name = $"{teachers[i]} {teachers[i]}",
-                    UserName = teachers[i],
-                    Email = $"{teachers[i]}.{teachers[i]}@mail.se",
-                    Course = courses[i],
-                    IsStudent = isStudent[i]
-                });
-            }
+            var users1 = GetUsers(courses[1], count);
+            users1[0].IsStudent = false;
+            users1[1].UserName = "student";
+
+            users.AddRange(users1);
 
             var password = _configuration["password"]
                 ?? throw new Exception("password not exist in config"); // From secret
@@ -320,6 +306,21 @@ namespace LMS.Persistance.Extensions
                 await _userManager.AddToRoleAsync(user, user.IsStudent
                     ? _studentRole : _teacherRole);
             }
+
+            return users;
+        }
+
+        private static List<User> GetUsers(Course course, int count)
+        {
+            var faker = new Faker<User>()
+                .RuleFor(u => u.UserName, f => f.Person.UserName)
+                .RuleFor(u => u.Name, f => f.Person.FullName)
+                .RuleFor(u => u.Email, f => f.Internet.Email())
+                .RuleFor(u => u.IsStudent, true)
+                .RuleFor(u => u.Course, course);
+
+            var users = new List<User>();            
+            users.AddRange(faker.Generate(count));
 
             return users;
         }
