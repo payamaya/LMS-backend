@@ -133,12 +133,12 @@ namespace LMS.Presentation.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
-<<<<<<< HEAD
+//<<<<<<< HEAD
         [Authorize(Roles = "Teacher")]
-        public async Task<IActionResult> DeleteCourse(int id)
-=======
-        public async Task<IActionResult> DeleteCourseAsync(Guid id)
->>>>>>> 6284b88 (Delete Method for All controller except user and activityType not finished yet)
+        public async Task<IActionResult> DeleteCourse(Guid id)
+//=======
+//        public async Task<IActionResult> DeleteCourseAsync(Guid id)
+//>>>>>>> 6284b88 (Delete Method for All controller except user and activityType not finished yet)
         {
             await _sm.CourseService.DeleteCourseAsync(id);
 

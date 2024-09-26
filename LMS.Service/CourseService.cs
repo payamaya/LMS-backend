@@ -29,13 +29,13 @@ namespace LMS.Service
             _mapper = mapper;
         }
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
         public async Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
-=======
+//=======
      
 
-        public async Task<CourseDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
->>>>>>> 6284b88 (Delete Method for All controller except user and activityType not finished yet)
+//        public async Task<CourseDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
+//>>>>>>> 6284b88 (Delete Method for All controller except user and activityType not finished yet)
         {
             var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
             if (course is null)
