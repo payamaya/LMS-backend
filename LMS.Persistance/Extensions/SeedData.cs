@@ -286,7 +286,8 @@ namespace LMS.Persistance.Extensions
             int count)
         {
             var users = new List<User>();
-            var teachers = new string[] { "mfl", "pos" };
+            var teachers = new string[] { "mfl", "pls" };
+            var isStudent = new bool[] { false, true };
             for (int i = 0; i < courses.Count; i++)
             {
                 var faker = new Faker<User>()
@@ -303,7 +304,7 @@ namespace LMS.Persistance.Extensions
                     UserName = teachers[i],
                     Email = $"{teachers[i]}.{teachers[i]}@mail.se",
                     Course = courses[i],
-                    IsStudent = false
+                    IsStudent = isStudent[i]
                 });
             }
 
