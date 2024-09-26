@@ -286,7 +286,7 @@ namespace LMS.Persistance.Extensions
             int count)
         {
             var users = new List<User>();
-            var teachers = new string[] { "mfl", "pls" };
+            var teachers = new string[] { "teacher", "student" };
             var isStudent = new bool[] { false, true };
             for (int i = 0; i < courses.Count; i++)
             {
