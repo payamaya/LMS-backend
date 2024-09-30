@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-
+﻿
 namespace LMS.API.Middleware
 {
     public class UnauthorizedMiddleware

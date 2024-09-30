@@ -1,8 +1,4 @@
-﻿using LMS.Application.Exceptions;
-
-using System.Text.Json;
-
-namespace LMS.API.Middleware
+﻿namespace LMS.API.Middleware
 {
     public class HttpExceptionHandlingMiddleware
     {

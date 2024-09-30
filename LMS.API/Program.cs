@@ -1,13 +1,5 @@
 
-using LMS.API.Extensions;
-using LMS.Infrastructure;
-using LMS.Presentation;
-using LMS.Repository;
-using LMS.Persistance.Extensions;
-using LMS.API.Middleware;
-
 namespace LMS.API;
-
 
 public class Program
 {
@@ -29,21 +21,6 @@ public class Program
 		builder.Services.ConfigureCors();
 		//builder.Services.ConfigureOpenApi();
 		builder.Services.ConfigureJwt(builder.Configuration);
-
-		//        builder.Services.AddDbContext<ApplicationDbContext>(options =>
-		//options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-		//builder.Services.AddControllers(configure =>
-		//	configure.ReturnHttpNotAcceptable = true
-		//)
-		////.AddApplicationPart(typeof(CoursesController).Assembly)
-		//.AddJsonOptions(opts =>
-		//{
-		//	var enumConverter = new JsonStringEnumConverter();
-		//	opts.JsonSerializerOptions.Converters.Add(enumConverter);
-		//	opts.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault | JsonIgnoreCondition.WhenWritingNull;
-		//})
-		//.AddNewtonsoftJson(option => option.SerializerSettings.NullValueHandling = NullValueHandling.Ignore);
 
 		builder.Services.AddEndpointsApiExplorer();
 		builder.Services.AddSwaggerGen();

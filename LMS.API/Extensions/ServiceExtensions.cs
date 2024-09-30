@@ -1,18 +1,4 @@
-﻿//using LMS.API.Service.Contracts;
-//using LMS.API.Services;
-
-using LMS.Models.Entities;
-using LMS.Service;
-using LMS.Service.Contracts;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
-
-
-//using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi.Models;
-
-using System.Text;
+﻿
 
 namespace LMS.API.Extensions;
 

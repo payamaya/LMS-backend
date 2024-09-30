@@ -1,17 +1,7 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using System.Web.Http;
-
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using LMS.API;
-using LMS.Infrastructure.Dtos;
+﻿using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 using LMS.Persistance;
 using LMS.Service.Contracts;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -19,7 +9,7 @@ namespace LMS.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Teacher")]
+    //[Authorize(Roles = "Teacher")]
     public class ActivitiesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -31,26 +21,24 @@ namespace LMS.Presentation.Controllers
             _sm = sm;
         }
 
-        // GET: api/Courses
+        // GET: api/Activities
         /// <summary>
-        /// 
+        /// Retrieves a list of all activities.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>A list of <see cref="ActivityDto"/> objects.</returns>
         [HttpGet]
-        //[Authorize]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<ActivityDto>>> GetActivities()
         {
             return Ok(await _sm.ActivityService.GetActivitiesAsync());
-            /*return await _context.Courses.ToListAsync();*/
         }
 
-        // GET: api/Courses/5
+        // GET: api/Activities/5
         /// <summary>
-        /// Hur gör man det här, 3 * /
+        /// Retrieves a specific activity by its unique identifier.
         /// </summary>
-        /// <param name="id">Hej hej</param>
-        /// <returns></returns>
+        /// <param name="id">The unique identifier of the activity to retrieve.</param>
+        /// <returns>An <see cref="ActivityDto"/> object if found; otherwise, a 404 Not Found result.</returns>
         [HttpGet("{id:guid}")]
         [Produces("application/json")]
         public async Task<ActionResult<ActivityDto>> GetActivity(Guid id)
@@ -65,52 +53,63 @@ namespace LMS.Presentation.Controllers
             return Ok(activity);
         }
 
-        // PUT: api/Courses/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-             [HttpPut("{id}")]
-             public async Task<IActionResult> PutActivity(Guid id, Activity activity)
-             {
-                 if (id != activity.Id)
-                 {
-                     return BadRequest();
-                 }
+        // PUT: api/Activities/5
+        /// <summary>
+        /// Updates an existing activity identified by its unique identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the activity to update.</param>
+        /// <param name="activity">The updated <see cref="Activity"/> object.</param>
+        /// <returns>A 204 No Content result if the update is successful; otherwise, a 400 Bad Request or 404 Not Found result.</returns>
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutActivity(Guid id, Activity activity)
+        {
+            if (id != activity.Id)
+            {
+                return BadRequest();
+            }
 
-                 _context.Entry(activity).State = EntityState.Modified;
+            _context.Entry(activity).State = EntityState.Modified;
 
-                 try
-                 {
-                     await _context.SaveChangesAsync();
-                 }
-                 catch (DbUpdateConcurrencyException)
-                 {
-                     if (!ActivityExists(id))
-                     {
-                         return NotFound();
-                     }
-                     else
-                     {
-                         throw;
-                     }
-                 }
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!ActivityExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
-                 return NoContent();
-             }
+            return NoContent();
+        }
 
-     
-
-        // POST: api/Courses
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        // POST: api/Activities
+        /// <summary>
+        /// Creates a new activity.
+        /// </summary>
+        /// <param name="activity">The <see cref="Activity"/> object to create.</param>
+        /// <returns>A 201 Created result with the location of the newly created activity; otherwise, a 400 Bad Request.</returns>
         [HttpPost]
         public async Task<ActionResult<Activity>> PostActivity(Activity activity)
         {
             _context.Activitys.Add(activity);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("Pso ACtivity", new { id = activity.Id }, activity);
+            return CreatedAtAction("GetActivity", new { id = activity.Id }, activity);
         }
 
-
-        // DELETE: api/Courses/5
+        // DELETE: api/Activities/5
+        /// <summary>
+        /// Deletes an existing activity by its unique identifier.
+        /// </summary>
+        /// <param name="id">The unique identifier of the activity to delete.</param>
+        /// <returns>A 204 No Content result if the deletion is successful; otherwise, a 404 Not Found result.</returns>
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivityAsync(Guid id)
         {
@@ -119,14 +118,9 @@ namespace LMS.Presentation.Controllers
             return NoContent();
         }
 
-
-
-
         private bool ActivityExists(Guid id)
         {
             return _context.Activitys.Any(a => a.Id == id);
         }
-
     }
 }
-

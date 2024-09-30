@@ -28,6 +28,7 @@ namespace LMS.Service
             _uow = uow;
             _mapper = mapper;
         }
+<<<<<<< Updated upstream
 
 //<<<<<<< HEAD
         public async Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
@@ -36,6 +37,12 @@ namespace LMS.Service
 
 //        public async Task<CourseDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
 //>>>>>>> 6284b88 (Delete Method for All controller except user and activityType not finished yet)
+=======
+     
+
+        public async Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
+
+>>>>>>> Stashed changes
         {
             var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
             if (course is null)
@@ -79,6 +86,7 @@ namespace LMS.Service
             return _mapper.Map<IEnumerable<CourseDto>>(courses);
 
         }
+   
 
         public async Task DeleteCourseAsync(Guid id)
         {
@@ -92,5 +100,6 @@ namespace LMS.Service
         private async Task<Course?> GetCourseBy(Guid id) => 
             await _uow.Course.GetCourseAsync(id, trackChanges: false);
 
+      
     }
 }

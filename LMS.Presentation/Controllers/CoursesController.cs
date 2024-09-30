@@ -43,7 +43,7 @@ namespace LMS.Presentation.Controllers
         //[Authorize]
         //[Authorize(Roles = "Teacher")]
         //[Authorize(Roles = "Student")]
-        [Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Teacher")]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<CourseDto>>> GetCourses()
         {
@@ -60,7 +60,7 @@ namespace LMS.Presentation.Controllers
         //[Authorize]
         //[Authorize(Roles = "Teacher")]
         //[OverrideAuthorization]
-        [Authorize(Roles = "Student")]
+        //[Authorize(Roles = "Student")]
         [Produces("application/json")]
         public async Task<ActionResult<CourseDetailedDto>> GetCourse()
         {
@@ -79,7 +79,7 @@ namespace LMS.Presentation.Controllers
         //[Authorize]
         //[Authorize(Roles = "Teacher")]
         //[Authorize(Roles = "Student")]
-        [Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Teacher")]
         [Produces("application/json")]
         public async Task<ActionResult<CourseDetailedDto>> GetCourse(Guid id)
         {
@@ -122,7 +122,7 @@ namespace LMS.Presentation.Controllers
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        [Authorize(Roles = "Teacher")]
+        //[Authorize(Roles = "Teacher")]
         public async Task<ActionResult<Course>> PostCourse(Course course)
         {
             _context.Courses.Add(course);
@@ -133,15 +133,19 @@ namespace LMS.Presentation.Controllers
 
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
+<<<<<<< Updated upstream
 //<<<<<<< HEAD
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> DeleteCourse(Guid id)
 //=======
 //        public async Task<IActionResult> DeleteCourseAsync(Guid id)
 //>>>>>>> 6284b88 (Delete Method for All controller except user and activityType not finished yet)
+=======
+        //[Authorize(Roles = "Teacher")]
+        public async Task<IActionResult> DeleteCourseAsync(Guid id)
+>>>>>>> Stashed changes
         {
             await _sm.CourseService.DeleteCourseAsync(id);
-
             return NoContent();
         }
 
