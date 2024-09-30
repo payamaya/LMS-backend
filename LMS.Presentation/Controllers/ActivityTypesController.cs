@@ -1,19 +1,10 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using System.Web.Http;
-
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using LMS.API;
+﻿
 using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 using LMS.Persistance;
 using LMS.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Presentation.Controllers
 {
