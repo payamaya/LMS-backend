@@ -66,41 +66,6 @@ namespace LMS.Persistance.Extensions
 						//await db.Users.AddRangeAsync(users);
 					}
 
-					//DateTime.Parse("2024-03-24");
-					/// //// Seed ContactInformation
-					//var contactInformation = GenerateContactInformation(5).ToList();
-					//await db.ContactInformations.AddRangeAsync(contactInformation);
-					//await db.SaveChangesAsync();
-
-					//// Seed Directors
-					//var directors = GenerateDirectors(5).ToList();
-					//await db.Directors.AddRangeAsync(directors);
-					//await db.SaveChangesAsync();
-
-					//// Seed ApplicationUsers (Actors)
-					//var actors = GenerateActors(5, contactInformation).ToList();
-					//await db.Actors.AddRangeAsync(actors);
-					//await db.SaveChangesAsync();
-
-					//// Seed Genres
-					//var genres = GenerateGenres(5).ToList();
-					//await db.Genres.AddRangeAsync(genres);
-					//await db.SaveChangesAsync();
-
-					//// Seed Movies
-					//var movies = GenerateMovies(5, directors, actors, genres).ToList();
-					//await db.Movies.AddRangeAsync(movies);
-					//await db.SaveChangesAsync();
-
-					//// Seed MovieActors
-					//var movieActors = GenerateMovieActors(actors, movies).ToList();
-					//await db.MovieActors.AddRangeAsync(movieActors);
-					//await db.SaveChangesAsync();
-
-					//// Seed MovieGenres
-					//var movieGenres = GenerateMovieGenres(genres, movies).ToList();
-					//await db.MovieGenres.AddRangeAsync(movieGenres);
-					//await db.SaveChangesAsync();
 				}
 				catch (Exception ex)
 				{
@@ -161,8 +126,8 @@ namespace LMS.Persistance.Extensions
 				},
 				new Activity
 				{
-					ActivityName = "Assignment 2: Basic Python Program",
-					Description = "Create a simple Python program.",
+					ActivityName = "Intermediate Python program",
+					Description = "Create an intermediate Python program.",
 					StartTime = DateTime.Parse("2023-01-07T12:00:00"),
 					EndTime = DateTime.Parse("2023-01-14T00:00:00"),
 					Module = modules[2],
@@ -170,8 +135,8 @@ namespace LMS.Persistance.Extensions
 				},
 				new Activity
 				{
-					ActivityName = "Lecture 2: Arrays and Linked Lists",
-					Description = "Overview of arrays and linked lists.",
+					ActivityName = "Lecture 2: Delegate",
+					Description = "Overview of Delegates.",
 					StartTime = DateTime.Parse("2023-02-20T13:00:00"),
 					EndTime = DateTime.Parse("2023-02-20T15:00:00"),
 					Module = modules[3],
@@ -179,8 +144,8 @@ namespace LMS.Persistance.Extensions
 				},
 				new Activity
 				{
-					ActivityName = "Assignment 2: Implement a Linked List",
-					Description = "Implement a simple linked list in Python.",
+					ActivityName = "Assignment 2: Implement merged sort",
+					Description = "Implement merged sort algorithm.",
 					StartTime = DateTime.Parse("2023-02-22T12:00:00"),
 					EndTime = DateTime.Parse("2023-03-01T00:00:00"),
 					Module = modules[3],
@@ -188,8 +153,8 @@ namespace LMS.Persistance.Extensions
 				},
 				new Activity
 				{
-					ActivityName = "Lecture 2: Arrays and Linked Lists",
-					Description = "Overview of arrays and linked lists.",
+					ActivityName = "Lecture 2: UseEffect",
+					Description = "Overview of UseEffect.",
 					StartTime = DateTime.Parse("2023-02-20T13:00:00"),
 					EndTime = DateTime.Parse("2023-02-20T15:00:00"),
 					Module = modules[4],
@@ -197,8 +162,8 @@ namespace LMS.Persistance.Extensions
 				},
 				new Activity
 				{
-					ActivityName = "Assignment 2: Implement a Linked List",
-					Description = "Implement a simple linked list in Python.",
+					ActivityName = "Assignment 2: Implement UseEffect",
+					Description = "Implement a simple UseEffect.",
 					StartTime = DateTime.Parse("2023-02-22T12:00:00"),
 					EndTime = DateTime.Parse("2023-03-01T00:00:00"),
 					Module = modules[4],
@@ -206,8 +171,8 @@ namespace LMS.Persistance.Extensions
 				},
 				new Activity
 				{
-					ActivityName = "Lecture 2: Arrays and Linked Lists",
-					Description = "Overview of arrays and linked lists.",
+					ActivityName = "Lecture 2: Operators",
+					Description = "Overview of Operators.",
 					StartTime = DateTime.Parse("2023-02-20T13:00:00"),
 					EndTime = DateTime.Parse("2023-02-20T15:00:00"),
 					Module = modules[5],
@@ -215,8 +180,8 @@ namespace LMS.Persistance.Extensions
 				},
 				new Activity
 				{
-					ActivityName = "Assignment 2: Implement a Linked List",
-					Description = "Implement a simple linked list in Python.",
+					ActivityName = "Assignment 2: Methods & Function",
+					Description = "Implement a Methods & Function.",
 					StartTime = DateTime.Parse("2023-02-22T12:00:00"),
 					EndTime = DateTime.Parse("2023-03-01T00:00:00"),
 					Module = modules[5],
