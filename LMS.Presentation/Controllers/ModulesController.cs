@@ -7,6 +7,7 @@
 //using Microsoft.AspNetCore.Http;
 //using Microsoft.AspNetCore.Mvc;
 //using LMS.API;
+using LMS.Application.Exceptions;
 using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 using LMS.Persistance;
@@ -96,16 +97,28 @@ namespace LMS.Presentation.Controllers
              }*/
 
         // POST: api/Courses
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Module>> PostModule(Module module)
+        public async Task<ActionResult<ModuleDto>> PostModule(ModulePostDto modulePostDto)
         {
-            _context.Modules.Add(module);
-            await _context.SaveChangesAsync();
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-            return CreatedAtAction("Get Module", new { id = module.Id }, module);
+            try
+            {
+                ModuleDto? newModuleDto = await _sm.ModuleService.PostModuleAsync(modulePostDto);
+                return CreatedAtAction(nameof(GetModule), new { id = newModuleDto.Id }, newModuleDto);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message); // Return 404 if course not found
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An unexpected error occurred"); // General error handling
+            }
         }
-
         // DELETE: api/Courses/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteActivityModule(Guid id)

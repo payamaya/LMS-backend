@@ -48,5 +48,23 @@ namespace LMS.Service
         private async Task<Module?> GetModuleBy(Guid id) =>
             await _uow.Module.GetModuleAsync(id, trackChanges: false);
 
+        public async Task<ModuleDto> PostModuleAsync(ModulePostDto modulePostDto)
+        {
+            Course course = await _uow.Course.GetCourseAsync(modulePostDto.CourseId, false)
+                ?? throw new NotFoundException("Course Not found Exception", modulePostDto.CourseId);
+
+            //ToDo : Make sure that Module StartDate And EndDate do not collide with other modules*
+            //ToDo : Make mapper Map Module with course
+
+            var module = _mapper.Map<Module>(modulePostDto)
+            ?? throw new BadRequestException($"No Module Found");
+
+            Console.WriteLine("Module************" + module.ToString());
+            await _uow.Module.CreateAsync(module);
+            await _uow.CompleteAsync();
+
+            return _mapper.Map<ModuleDto>(module);
+                
+        }
     }
 }

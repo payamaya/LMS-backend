@@ -4,9 +4,9 @@ using LMS.Models.Entities;
 
 namespace LMS.Infrastructure.Profiles
 {
-    public class CourseMapperProfile : Profile
+    public class MapperProfile : Profile
     {
-        public CourseMapperProfile()
+        public MapperProfile()
         {
             CreateMap<Course, CourseDetailedDto>()
                 .ForMember(
@@ -37,6 +37,8 @@ namespace LMS.Infrastructure.Profiles
             CreateMap<Activity, ActivityDto>();
 
             CreateMap<ActivityType, ActivityTypeDto>();
+
+            CreateMap<ModulePostDto, Module>();
         }
 
         private static string GetCurrentState(Module module)
