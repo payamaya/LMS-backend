@@ -12,80 +12,92 @@ using System.Security.Claims;
 
 namespace LMS.Service
 {
-	public class CourseService : ICourseService
+    public class CourseService : ICourseService
 
-	{
-		private readonly UserManager<User> _userManager;
-		private readonly IUnitOfWork _uow;
-		private readonly IMapper _mapper;
+    {
+        private readonly UserManager<User> _userManager;
+        private readonly IUnitOfWork _uow;
+        private readonly IMapper _mapper;
 
-		public CourseService(
-			UserManager<User> userManager,
-			IUnitOfWork uow,
-			IMapper mapper)
-		{
-			_userManager = userManager;
-			_uow = uow;
-			_mapper = mapper;
-		}
-		public async Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
-		{
-			var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
-			if (course is null)
-			{
-				throw new NotFoundException(nameof(GetCourseAsync), courseId);
-				//return null; //ToDo: Fix later
-			}
+        public CourseService(
+            UserManager<User> userManager,
+            IUnitOfWork uow,
+            IMapper mapper)
+        {
+            _userManager = userManager;
+            _uow = uow;
+            _mapper = mapper;
+        }
+        public async Task<CourseDetailedDto?> GetCourseAsync(Guid courseId, bool trackChanges = false)
+        {
+            var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
+            if (course is null)
+            {
+                throw new NotFoundException(nameof(GetCourseAsync), courseId);
+                //return null; //ToDo: Fix later
+            }
 
-			return _mapper.Map<CourseDetailedDto>(course);
-		}
+            return _mapper.Map<CourseDetailedDto>(course);
+        }
 
-		// Bad request should never reach here, sent to Unauthorized middleware
-		public async Task<CourseDetailedDto?> GetCourseAsync(ClaimsPrincipal? userClaim, bool trackChanges = false)
-		{
-			if (userClaim == null) throw new BadRequestException($"Bad user claims");
+        // Bad request should never reach here, sent to Unauthorized middleware
+        public async Task<CourseDetailedDto?> GetCourseAsync(ClaimsPrincipal? userClaim, bool trackChanges = false)
+        {
+            if (userClaim == null)
+                throw new BadRequestException($"Bad user claims");
 
-			var user = await _userManager.GetUserAsync(userClaim);
-			if (user == null) throw new BadRequestException($"User not found");
+            var user = await _userManager.GetUserAsync(userClaim);
+            if (user == null)
+                throw new BadRequestException($"User not found");
 
-			var roles = await _userManager.GetRolesAsync(user);
-			if (roles == null || !roles.Contains("Student"))
-				throw new BadRequestException($"Role not found");
+            var roles = await _userManager.GetRolesAsync(user);
+            if (roles == null || !roles.Contains("Student"))
+                throw new BadRequestException($"Role not found");
 
-			var courseId = (Guid)user.CourseId!;
+            var courseId = (Guid)user.CourseId!;
 
-			var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
-			if (course is null)
-			{
-				throw new NotFoundException(nameof(GetCourseAsync), courseId);
-				//return null; //ToDo: Fix later
-			}
+            var course = await _uow.Course.GetCourseAsync(courseId, trackChanges);
+            if (course is null)
+            {
+                throw new NotFoundException(nameof(GetCourseAsync), courseId);
+                //return null; //ToDo: Fix later
+            }
 
-			return _mapper.Map<CourseDetailedDto>(course);
-		}
+            return _mapper.Map<CourseDetailedDto>(course);
+        }
 
-		public async Task<IEnumerable<CourseDto>> GetCoursesAsync(bool trackChanges = false)
-		{
-			var courses = await _uow.Course.GetCoursesAsync(trackChanges);
-			if (courses is null) return null!; //ToDo: Fix later
+        public async Task<IEnumerable<CourseDto>> GetCoursesAsync(bool trackChanges = false)
+        {
+            var courses = await _uow.Course.GetCoursesAsync(trackChanges);
+            if (courses is null)
+                return null!; //ToDo: Fix later
 
-			return _mapper.Map<IEnumerable<CourseDto>>(courses);
+            return _mapper.Map<IEnumerable<CourseDto>>(courses);
 
-		}
+        }
 
+        public async Task<CourseDto> PostCourseAsync(CourseDto courseDto)
+        {
+            var course = _mapper.Map<Course>(courseDto)
+                ?? throw new BadRequestException($"Bad input");
 
-		public async Task DeleteCourseAsync(Guid id)
-		{
+            await _uow.Course.CreateAsync(course);
 
-			var course = await GetCourseBy(id)
-				?? throw new NotFoundException("Course", id);
-			_uow.Course.Delete(course);
-			await _uow.CompleteAsync();
+            await _uow.CompleteAsync();
 
-		}
-		private async Task<Course?> GetCourseBy(Guid id) =>
-			await _uow.Course.GetCourseAsync(id, trackChanges: false);
+            return _mapper.Map<CourseDto>(course);
+        }
 
+        public async Task DeleteCourseAsync(Guid id)
+        {
 
-	}
+            var course = await GetCourseBy(id)
+                ?? throw new NotFoundException("Course", id);
+            _uow.Course.Delete(course);
+            await _uow.CompleteAsync();
+        }
+
+        private async Task<Course?> GetCourseBy(Guid id) =>
+            await _uow.Course.GetCourseAsync(id, trackChanges: false);
+    }
 }
