@@ -9,12 +9,10 @@
 //using LMS.API;
 using LMS.Application.Exceptions;
 using LMS.Infrastructure.Dtos;
-using LMS.Models.Entities;
 using LMS.Persistance;
 using LMS.Service.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Presentation.Controllers
 {
@@ -128,9 +126,9 @@ namespace LMS.Presentation.Controllers
             return NoContent();
         }
 
-       /* private bool CourseExists(int id)
-        {
-            return _context.Courses.Any(e => e.Id == id);
-        }*/
+        /* private bool CourseExists(int id)
+         {
+             return _context.Courses.Any(e => e.Id == id);
+         }*/
     }
 }

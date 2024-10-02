@@ -23,7 +23,8 @@ namespace LMS.Service
         {
 
             var activity = await _uow.Activity.GetActivityAsync(courseId, trackChanges);
-            if (activity is null) return null; //ToDo: Fix later
+            if (activity is null)
+                return null; //ToDo: Fix later
 
             return _mapper.Map<ActivityDto>(activity);
         }
@@ -31,7 +32,8 @@ namespace LMS.Service
         public async Task<IEnumerable<ActivityDto>> GetActivitiesAsync(bool trackChanges = false)
         {
             var activity = await _uow.Activity.GetActivitiesAsync(trackChanges);
-            if (activity is null) return null!; //ToDo: Fix later
+            if (activity is null)
+                return null!; //ToDo: Fix later
 
             return _mapper.Map<IEnumerable<ActivityDto>>(activity);
 
@@ -39,13 +41,29 @@ namespace LMS.Service
 
         public async Task DeleteActivityAsync(Guid id)
         {
-
-         var activitiy = await GetActivityBy(id) 
-                ?? throw new NotFoundException("Acitivity" , id);
+            var activitiy = await GetActivityBy(id)
+                   ?? throw new NotFoundException("Acitivity", id);
             _uow.Activity.Delete(activitiy);
-            await _uow.CompleteAsync(); 
+            await _uow.CompleteAsync();
         }
-        private async Task<Activity?> GetActivityBy(Guid id) => 
-            await _uow.Activity.GetActivityAsync(id, trackChanges:false);
+
+        private async Task<Activity?> GetActivityBy(Guid id) =>
+            await _uow.Activity.GetActivityAsync(id, trackChanges: false);
+
+        public async Task<ActivityDto?> PostActivityAsync(ActivityPostDto postDto)
+        {
+            ActivityType? activityType = await _uow.ActivityType.GetActivityTypeAsync(postDto.ActivityTypeId, false)
+                ?? throw new NotFoundException("No activity type found", postDto.ActivityTypeId);
+
+            Module? module = await _uow.Module.GetModuleAsync(postDto.ModuleId, false)
+                ?? throw new NotFoundException("No module found", postDto.ModuleId);
+
+            Activity activity = _mapper.Map<Activity>(postDto);
+
+            await _uow.Activity.CreateAsync(activity);
+            await _uow.CompleteAsync();
+
+            return _mapper.Map<ActivityDto>(activity);
+        }
     }
 }
