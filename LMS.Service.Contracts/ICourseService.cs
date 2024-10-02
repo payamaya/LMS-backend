@@ -1,5 +1,4 @@
 ﻿using LMS.Infrastructure.Dtos;
-using LMS.Models.Entities;
 
 using System.Security.Claims;
 
@@ -12,6 +11,6 @@ namespace LMS.Service.Contracts
         Task<IEnumerable<CourseDto>> GetCoursesAsync(bool trackChanges = false);
 
         Task DeleteCourseAsync(Guid id);
-
+        Task<CourseDto> PostCourseAsync(CourseDto course);
     }
 }
