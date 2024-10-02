@@ -1,7 +1,9 @@
-﻿using LMS.Infrastructure.Dtos;
+﻿using LMS.Application.Exceptions;
+using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 using LMS.Persistance;
 using LMS.Service.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,7 +11,7 @@ namespace LMS.Presentation.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize(Roles = "Teacher")]
+    [Authorize(Roles = "Teacher")]
     public class ActivitiesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -93,15 +95,29 @@ namespace LMS.Presentation.Controllers
         /// <summary>
         /// Creates a new activity.
         /// </summary>
+        /// <param name="postDto">PostDto is required here</param>
         /// <param name="activity">The <see cref="Activity"/> object to create.</param>
         /// <returns>A 201 Created result with the location of the newly created activity; otherwise, a 400 Bad Request.</returns>
         [HttpPost]
-        public async Task<ActionResult<Activity>> PostActivity(Activity activity)
+        public async Task<ActionResult<Activity>> PostActivity(ActivityPostDto postDto)
         {
-            _context.Activitys.Add(activity);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetActivity", new { id = activity.Id }, activity);
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            try
+            {
+                ActivityDto? getActivityDto = await _sm.ActivityService.PostActivityAsync(postDto);
+                return CreatedAtAction(nameof(GetActivity), new { id = getActivityDto?.Id }, getActivityDto);
+            }
+            catch (NotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, "An unexpected error occurred"); // General error handling
+            }
         }
 
         // DELETE: api/Activities/5
