@@ -35,6 +35,7 @@ namespace LMS.Infrastructure.Profiles
                     opt => opt.MapFrom(src => GetCurrentState(src)));
 
             CreateMap<Activity, ActivityDto>();
+            CreateMap<ActivityPostDto, Activity>();
 
             CreateMap<ActivityType, ActivityTypeDto>();
 
