@@ -2,8 +2,6 @@
 using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 
-using System.Linq.Expressions;
-
 namespace LMS.Infrastructure.Profiles
 {
     public class CourseMapperProfile : Profile
@@ -27,7 +25,7 @@ namespace LMS.Infrastructure.Profiles
                     dest => dest.Teacher,
                     opt => opt.MapFrom(
                         src => src.Users!
-                            .Where(u => !u.IsStudent).FirstOrDefault()));
+                            .Where(u => !u.IsStudent).FirstOrDefault())).ReverseMap();
 
             CreateMap<User, UserDto>();
 
