@@ -121,7 +121,7 @@ namespace LMS.Presentation.Controllers
         {
             CourseDto newCourseDto = await _sm.CourseService.PostCourseAsync(courseDto);
 
-            return CreatedAtAction("PostCourse", new { id = newCourseDto.Id }, newCourseDto);
+            return CreatedAtAction(nameof(GetCourse), new { id = newCourseDto.Id }, newCourseDto);
         }
 
         // DELETE: api/Courses/5
