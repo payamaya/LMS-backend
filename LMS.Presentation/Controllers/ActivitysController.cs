@@ -63,16 +63,9 @@ namespace LMS.Presentation.Controllers
         /// <param name="activity">The <see cref="Activity"/> object to create.</param>
         /// <returns>A 201 Created result with the location of the newly created activity; otherwise, a 400 Bad Request.</returns>
         [HttpPost]
-        //public async Task<ActionResult<ActivityDto>> PostActivity(ActivityPostDto postDto)
         public async Task<ActionResult<Activity>> PostActivity(ActivityPostDto postDto)
         {
-
-            // Note Finns det någon anledning att ni tittat på modelstate?
-            // Det görs automatiskt åt er redan innan metoden körs pga [ApiController] attributet.
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+         
             try
             {
                 ActivityDto? getActivityDto = await _sm.ActivityService.PostActivityAsync(postDto);
