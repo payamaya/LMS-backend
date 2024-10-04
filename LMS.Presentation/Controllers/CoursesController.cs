@@ -121,7 +121,7 @@ namespace LMS.Presentation.Controllers
         {
             CourseDto newCourseDto = await _sm.CourseService.PostCourseAsync(courseDto);
 
-            return CreatedAtAction(nameof(GetCourse), new { id = newCourseDto.Id }, newCourseDto);
+            return CreatedAtAction(nameof(PostCourse), new { id = newCourseDto.Id }, newCourseDto);
         }
 
         // DELETE: api/Courses/5
@@ -129,9 +129,25 @@ namespace LMS.Presentation.Controllers
         [Authorize(Roles = "Teacher")]
         public async Task<IActionResult> DeleteCourseAsync(Guid id)
         {
+            Console.WriteLine($"Delete request for course ID: {id}");
+
+            var course = await _sm.CourseService.GetCourseAsync(id);
+            if (course == null)
+            {
+                Console.WriteLine($"Course with ID {id} not found.");
+                return NotFound(new
+                {
+                    type = "https://tools.ietf.org/html/rfc9110#section-15.5.5",
+                    title = "Resource not found.",
+                    detail = $"Course ({id}) is not found.",
+                    status = 404
+                });
+            }
+
             await _sm.CourseService.DeleteCourseAsync(id);
             return NoContent();
         }
+
 
         /*private bool CourseExists(int id)
         {
