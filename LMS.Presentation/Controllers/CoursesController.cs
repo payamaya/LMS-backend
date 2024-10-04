@@ -70,7 +70,6 @@ namespace LMS.Presentation.Controllers
         public async Task<ActionResult<CourseDetailedDto>> GetCourse(Guid id)
         {
             var course = await _sm.CourseService.GetCourseAsync(id);
-
             return Ok(course);
         }
 
