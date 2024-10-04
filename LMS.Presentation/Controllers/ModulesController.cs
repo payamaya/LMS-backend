@@ -61,10 +61,6 @@ namespace LMS.Presentation.Controllers
         [HttpPost]
         public async Task<ActionResult<ModuleDto>> PostModule(ModulePostDto modulePostDto)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
 
             try
             {
