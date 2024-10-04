@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/activities")]
     [ApiController]
     [Authorize(Roles = "Teacher")]
     public class ActivitiesController : ControllerBase
@@ -55,42 +55,6 @@ namespace LMS.Presentation.Controllers
             return Ok(activity);
         }
 
-        // PUT: api/Activities/5
-        /// <summary>
-        /// Updates an existing activity identified by its unique identifier.
-        /// </summary>
-        /// <param name="id">The unique identifier of the activity to update.</param>
-        /// <param name="activity">The updated <see cref="Activity"/> object.</param>
-        /// <returns>A 204 No Content result if the update is successful; otherwise, a 400 Bad Request or 404 Not Found result.</returns>
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutActivity(Guid id, Activity activity)
-        {
-            if (id != activity.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(activity).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ActivityExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
-        }
-
         // POST: api/Activities
         /// <summary>
         /// Creates a new activity.
@@ -99,8 +63,12 @@ namespace LMS.Presentation.Controllers
         /// <param name="activity">The <see cref="Activity"/> object to create.</param>
         /// <returns>A 201 Created result with the location of the newly created activity; otherwise, a 400 Bad Request.</returns>
         [HttpPost]
+        //public async Task<ActionResult<ActivityDto>> PostActivity(ActivityPostDto postDto)
         public async Task<ActionResult<Activity>> PostActivity(ActivityPostDto postDto)
         {
+
+            // Note Finns det någon anledning att ni tittat på modelstate?
+            // Det görs automatiskt åt er redan innan metoden körs pga [ApiController] attributet.
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

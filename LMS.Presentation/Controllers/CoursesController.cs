@@ -82,37 +82,6 @@ namespace LMS.Presentation.Controllers
             return Ok(course);
         }
 
-        // PUT: api/Courses/5
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        /*     [HttpPut("{id}")]
-			 public async Task<IActionResult> PutCourse(int id, Course course)
-			 {
-				 if (id != course.Id)
-				 {
-					 return BadRequest();
-				 }
-
-				 _context.Entry(course).State = EntityState.Modified;
-
-				 try
-				 {
-					 await _context.SaveChangesAsync();
-				 }
-				 catch (DbUpdateConcurrencyException)
-				 {
-					 if (!CourseExists(id))
-					 {
-						 return NotFound();
-					 }
-					 else
-					 {
-						 throw;
-					 }
-				 }
-
-				 return NoContent();
-			 }*/
-
         // POST: api/Courses
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -133,9 +102,5 @@ namespace LMS.Presentation.Controllers
             return NoContent();
         }
 
-        /*private bool CourseExists(int id)
-        {
-            return _context.Courses.Any(e => e.Id == id);
-        }*/
     }
 }

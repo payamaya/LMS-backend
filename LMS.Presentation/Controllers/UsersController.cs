@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/users")]
     [ApiController]
     [Authorize(Roles = "Teacher")]
     public class UsersController : ControllerBase
