@@ -101,10 +101,5 @@ namespace LMS.Presentation.Controllers
 
             return NoContent();
         }
-
-        private bool ActivityExists(Guid id)
-        {
-            return _context.Activitys.Any(a => a.Id == id);
-        }
     }
 }

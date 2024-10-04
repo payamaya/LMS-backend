@@ -1,12 +1,6 @@
 ﻿//using System;
 //using System.Collections.Generic;
-//using System.Linq;
-//using System.Threading.Tasks;
-//using System.Web.Http;
 
-//using Microsoft.AspNetCore.Http;
-//using Microsoft.AspNetCore.Mvc;
-//using LMS.API;
 using LMS.Application.Exceptions;
 using LMS.Infrastructure.Dtos;
 using LMS.Persistance;
