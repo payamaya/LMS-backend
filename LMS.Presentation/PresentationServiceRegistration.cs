@@ -1,10 +1,9 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using Newtonsoft.Json;
-using System.Text.Json.Serialization;
-using System.Reflection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.OpenApi.Models;
-using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
+using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace LMS.Presentation
 {

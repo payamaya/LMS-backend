@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LMS.Presentation.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/courses")]
     [ApiController]
     public class CoursesController : ControllerBase
     {
@@ -117,9 +117,9 @@ namespace LMS.Presentation.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
         [Authorize(Roles = "Teacher")]
-        public async Task<ActionResult<CourseDto>> PostCourse(CourseDto courseDto)
+        public async Task<ActionResult<CourseDto>> PostCourse(CoursePostDto postDto)
         {
-            CourseDto newCourseDto = await _sm.CourseService.PostCourseAsync(courseDto);
+            CourseDto newCourseDto = await _sm.CourseService.PostCourseAsync(postDto);
 
             return CreatedAtAction(nameof(GetCourse), new { id = newCourseDto.Id }, newCourseDto);
         }

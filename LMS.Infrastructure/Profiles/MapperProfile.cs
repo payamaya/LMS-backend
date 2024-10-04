@@ -40,6 +40,10 @@ namespace LMS.Infrastructure.Profiles
             CreateMap<ActivityType, ActivityTypeDto>();
 
             CreateMap<ModulePostDto, Module>();
+            CreateMap<CoursePostDto, Course>()
+                .ForMember(
+                    dest => dest.Users,
+      opt => opt.Ignore());
         }
 
         private static string GetCurrentState(Module module)

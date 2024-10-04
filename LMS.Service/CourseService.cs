@@ -76,10 +76,26 @@ namespace LMS.Service
 
         }
 
-        public async Task<CourseDto> PostCourseAsync(CourseDto courseDto)
+        public async Task<CourseDto> PostCourseAsync(CoursePostDto postDto)
         {
-            var course = _mapper.Map<Course>(courseDto)
+            var course = _mapper.Map<Course>(postDto)
                 ?? throw new BadRequestException($"Bad input");
+
+            if (postDto.TeacherId.HasValue)
+            {
+                Guid teacherId = postDto.TeacherId.Value;
+                var teacher = await _uow.User.GetUserAsync(postDto.TeacherId.Value, true)
+                    ?? throw new NotFoundException($"Teacher not found", postDto);
+                if (teacher.IsStudent)
+                {
+                    throw new Exception("The user is not a teacher");
+                }
+                if (course.Users == null)
+                {
+                    course.Users = new List<User>();
+                }
+                course.Users.Add(teacher);
+            }
 
             await _uow.Course.CreateAsync(course);
 

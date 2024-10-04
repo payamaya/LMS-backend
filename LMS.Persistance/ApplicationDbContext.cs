@@ -1,7 +1,6 @@
 ﻿using LMS.Models.Entities;
-
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Persistance
@@ -17,6 +16,6 @@ namespace LMS.Persistance
         public DbSet<Module> Modules => Set<Module>();
         public DbSet<Activity> Activitys => Set<Activity>();
         public DbSet<ActivityType> ActivityTypes => Set<ActivityType>();
-       
+
     }
 }
