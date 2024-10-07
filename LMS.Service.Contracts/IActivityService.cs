@@ -8,5 +8,6 @@ namespace LMS.Service.Contracts
         Task<IEnumerable<ActivityDto>> GetActivitiesAsync(bool trackChanges = false);
 
         Task DeleteActivityAsync(Guid id);
+        Task<ActivityDto?> PostActivityAsync(ActivityPostDto postDto);
     }
 }

@@ -83,7 +83,9 @@
             //);
 
             var jsonResponse = JsonSerializer.Serialize(errorResponse);
-            context.Response.ContentLength = jsonResponse.Length; // Uppdatera content-length
+            var jsonResponseBytes = System.Text.Encoding.UTF8.GetBytes(jsonResponse);
+
+            context.Response.ContentLength = jsonResponseBytes.Length;
             return context.Response.WriteAsync(jsonResponse);
         }
     }

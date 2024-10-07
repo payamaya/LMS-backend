@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LMS.Repository
 {
-    //public class CourseRepository : RepositoryBase<User>, ICourseRepository
     public class CourseRepository : RepositoryBase<Course>, ICourseRepository
 
     {
@@ -32,7 +31,7 @@ namespace LMS.Repository
 
         public void DeleteCourse(Course course)
         {
-            Delete(course); 
+            Delete(course);
         }
     }
 }

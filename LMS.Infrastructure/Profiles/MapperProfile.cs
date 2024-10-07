@@ -2,13 +2,11 @@
 using LMS.Infrastructure.Dtos;
 using LMS.Models.Entities;
 
-using System.Linq.Expressions;
-
 namespace LMS.Infrastructure.Profiles
 {
-    public class CourseMapperProfile : Profile
+    public class MapperProfile : Profile
     {
-        public CourseMapperProfile()
+        public MapperProfile()
         {
             CreateMap<Course, CourseDetailedDto>()
                 .ForMember(
@@ -27,7 +25,7 @@ namespace LMS.Infrastructure.Profiles
                     dest => dest.Teacher,
                     opt => opt.MapFrom(
                         src => src.Users!
-                            .Where(u => !u.IsStudent).FirstOrDefault()));
+                            .Where(u => !u.IsStudent).FirstOrDefault())).ReverseMap();
 
             CreateMap<User, UserDto>();
 
@@ -37,8 +35,15 @@ namespace LMS.Infrastructure.Profiles
                     opt => opt.MapFrom(src => GetCurrentState(src)));
 
             CreateMap<Activity, ActivityDto>();
+            CreateMap<ActivityPostDto, Activity>();
 
             CreateMap<ActivityType, ActivityTypeDto>();
+
+            CreateMap<ModulePostDto, Module>();
+            CreateMap<CoursePostDto, Course>()
+                .ForMember(
+                    dest => dest.Users,
+      opt => opt.Ignore());
         }
 
         private static string GetCurrentState(Module module)

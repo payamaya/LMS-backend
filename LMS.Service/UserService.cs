@@ -21,15 +21,17 @@ namespace LMS.Service
         public async Task<UserDto?> GetUserAsync(Guid courseId, bool trackChanges = false)
         {
             var user = await _uow.User.GetUserAsync(courseId, trackChanges);
-            if (user is null) return null; //ToDo: Fix later
+            if (user is null)
+                return null; //ToDo: Fix later
 
             return _mapper.Map<UserDto>(user);
         }
 
-        public async Task<IEnumerable<UserDto>> GetUsersAsync(bool trackChanges = false)
+        public async Task<IEnumerable<UserDto>> GetUsersAsync(bool onlyTeachers = false, bool trackChanges = false)
         {
-            var users = await _uow.User.GetUsersAsync(trackChanges);
-            if (users is null) return null!; //ToDo: Fix later
+            var users = await _uow.User.GetUsersAsync(onlyTeachers, trackChanges);
+            if (users is null)
+                return null!; //ToDo: Fix later
 
             return _mapper.Map<IEnumerable<UserDto>>(users);
         }

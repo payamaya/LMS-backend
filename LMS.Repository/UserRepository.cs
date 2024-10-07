@@ -14,11 +14,26 @@ namespace LMS.Repository
 
         public async Task<User?> GetUserAsync(Guid id, bool trackChanges)
         {
-            return await FindByCondition(a => a.Id.Equals(id), trackChanges).FirstOrDefaultAsync();
+            string idString = id.ToString();
+            return await FindByCondition(a => a.Id.Equals(idString), trackChanges)
+                .Include(u => u.Course)
+                .FirstOrDefaultAsync();
         }
 
-        public async Task<IEnumerable<User>> GetUsersAsync(bool trackChanges)
+        public async Task<User?> GetUserWithCoursesAsync(string userId, bool trackChanges)
         {
+            return await FindByCondition(u => u.Id.Equals(userId), trackChanges)
+                .Include(u => u.Course)
+                .FirstOrDefaultAsync();
+        }
+
+        public async Task<IEnumerable<User>> GetUsersAsync(bool onlyTeachers, bool trackChanges)
+        {
+            if (onlyTeachers)
+            {
+                return await FindByCondition(u => u.IsStudent == false, trackChanges).ToListAsync();
+            }
+
             return await FindAll(trackChanges).ToListAsync();
         }
 

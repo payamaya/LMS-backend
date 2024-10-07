@@ -22,6 +22,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\LMS.Application\LMS.Application.csproj" />
     <ProjectReference Include="..\LMS.Persistance\LMS.Persistance.csproj" />
     <ProjectReference Include="..\LMS.Service.Contracts\LMS.Service.Contracts.csproj" />
   </ItemGroup>

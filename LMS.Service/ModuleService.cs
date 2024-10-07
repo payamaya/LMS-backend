@@ -23,7 +23,8 @@ namespace LMS.Service
         {
 
             var module = await _uow.Module.GetModuleAsync(courseId, trackChanges);
-            if (module is null) return null; //ToDo: Fix later
+            if (module is null)
+                return null; //ToDo: Fix later
 
             return _mapper.Map<ModuleDto>(module);
         }
@@ -31,7 +32,8 @@ namespace LMS.Service
         public async Task<IEnumerable<ModuleDto>> GetModulesAsync(bool trackChanges = false)
         {
             var modules = await _uow.Module.GetModulesAsync(trackChanges);
-            if (modules is null) return null!; //ToDo: Fix later
+            if (modules is null)
+                return null!; //ToDo: Fix later
 
             return _mapper.Map<IEnumerable<ModuleDto>>(modules);
 
@@ -48,5 +50,18 @@ namespace LMS.Service
         private async Task<Module?> GetModuleBy(Guid id) =>
             await _uow.Module.GetModuleAsync(id, trackChanges: false);
 
+        public async Task<ModuleDto> PostModuleAsync(ModulePostDto modulePostDto)
+        {
+            Course course = await _uow.Course.GetCourseAsync(modulePostDto.CourseId, false)
+                ?? throw new NotFoundException("Course Not found Exception", modulePostDto.CourseId);
+
+            var module = _mapper.Map<Module>(modulePostDto)
+                ?? throw new BadRequestException($"No Module Found");
+            await _uow.Module.CreateAsync(module);
+            await _uow.CompleteAsync();
+
+            return _mapper.Map<ModuleDto>(module);
+
+        }
     }
 }

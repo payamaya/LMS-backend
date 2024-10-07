@@ -7,7 +7,7 @@ namespace LMS.Infrastructure.Extensions
     {
         public static void ConfigureAutoMapper(this IServiceCollection services)
         {
-            services.AddAutoMapper(typeof(CourseMapperProfile));
+            services.AddAutoMapper(typeof(MapperProfile));
         }
     }
 }
